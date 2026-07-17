@@ -209,17 +209,15 @@ if stats:
     for src, behind in stats["cycles_since_ok"].items():
         dot = "🟢" if behind == 0 else ("⚪" if behind is None else "🟠")
         health_bits.append(f"{dot} {src}")
-    last = (stats["last_cycle"] or "never").replace("T", " ").split("+")[0]
-    st.caption("  ·  ".join(health_bits) + f"  ·  last cycle {last} UTC")
+    last = (stats["last_cycle"] or "").replace("T", " ").split("+")[0]
+    updated = f"  ·  updated {last} UTC" if last else ""
+    st.caption("Data sources:  " + "  ·  ".join(health_bits) + updated)
 
 st.divider()
 
 df = load_feed()
 if df.empty:
-    st.info(
-        "No analyzed trades yet. Run `politrack cycle` (or `politrack backfill "
-        "--count 100`) to populate the feed."
-    )
+    st.info("No analyzed trades yet — new disclosures are checked every 30 minutes. Check back soon.")
     st.stop()
 
 # ---------------------------------------------------------------- sidebar
@@ -233,10 +231,7 @@ with st.sidebar:
 
     st.divider()
     st.header("🔔 Notifications")
-    st.caption(
-        "Get an email when a newly analyzed trade crosses your threshold. "
-        "Sent by the watcher on its next cycle."
-    )
+    st.caption("Get an email whenever a new trade crosses your interest threshold.")
     email = st.text_input("Email", placeholder="you@example.com")
     threshold = st.slider("Notify at score ≥", 40, 95, HOT_THRESHOLD, step=5)
     if st.button("Subscribe", width="stretch"):
@@ -244,10 +239,6 @@ with st.sidebar:
             st.success(subscribe(email, threshold))
         else:
             st.warning("Enter an email first.")
-    st.caption(
-        "Requires SMTP credentials on the watcher (`SMTP_USER`/`SMTP_PASS`, "
-        "e.g. a Gmail app password) — see README."
-    )
 
 view = df
 if people:
@@ -270,7 +261,7 @@ with tab_hot:
     if hot.empty:
         st.caption(
             f"Nothing above {HOT_THRESHOLD} right now — that's normal: most "
-            "disclosed trades are routine rebalances. The watcher checks every 30 minutes."
+            "disclosed trades are routine rebalances. New disclosures are checked every 30 minutes."
         )
     else:
         st.caption(f"{len(hot)} trades at or above {HOT_THRESHOLD}, newest first.")
@@ -340,3 +331,25 @@ with tab_table:
             )
         else:
             st.caption("No report file for that row.")
+
+    # Bulk download of every report currently in the filtered view
+    import io
+    import zipfile
+
+    report_files = [
+        REPO_ROOT / p
+        for p in view.report_path.dropna().unique()
+        if isinstance(p, str) and (REPO_ROOT / p).exists()
+    ]
+    if report_files:
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+            for f in report_files:
+                zf.write(f, arcname=f.name)
+        st.download_button(
+            f"⬇ Download all {len(report_files)} reports (.zip)",
+            data=buf.getvalue(),
+            file_name="politrack-reports.zip",
+            mime="application/zip",
+            key="dl-zip",
+        )
