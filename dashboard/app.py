@@ -127,6 +127,18 @@ def subscribe(email: str, threshold: int) -> str:
     return f"Subscribed: {email} (threshold ≥ {threshold})"
 
 
+def esc_md(text: str | None) -> str:
+    """Escape $ so Streamlit's markdown doesn't render dollar amounts as LaTeX math."""
+    return (text or "").replace("$", "\\$")
+
+
+def display_ticker(row: pd.Series, width: int = 24) -> str:
+    """Ticker if present; asset description otherwise (NaN-safe — pandas NaN is truthy)."""
+    if isinstance(row.ticker, str) and row.ticker:
+        return row.ticker
+    return (row.asset_description or "")[:width] if isinstance(row.asset_description, str) else "?"
+
+
 def score_label(score: float) -> str:
     if score >= HOT_THRESHOLD:
         return f"🔥 :red[**{score:.0f}**]"
@@ -135,12 +147,12 @@ def score_label(score: float) -> str:
     return f":gray[**{score:.0f}**]"
 
 
-def render_trade(row: pd.Series) -> None:
+def render_trade(row: pd.Series, key_prefix: str = "feed") -> None:
     direction = "🟢 BUY" if row.transaction_type == "purchase" else "🔴 SELL"
-    ticker = row.ticker or (row.asset_description or "")[:24]
+    ticker = display_ticker(row)
     header = (
         f"{score_label(row.interest_score)} · **{ticker}** · {direction} · "
-        f"{row.person_name} ({row.chamber}) · {row.amount_range}"
+        f"{row.person_name} ({row.chamber}) · {esc_md(row.amount_range)}"
     )
     with st.expander(header):
         m = st.columns(4)
@@ -150,16 +162,26 @@ def render_trade(row: pd.Series) -> None:
         m[3].metric("Legislative", f"{row.legislative_score:+.1f}")
         st.caption(
             f"Traded {row.trade_date} · disclosed {row.disclosure_date} "
-            f"({row.disclosure_lag_days} days later) · {row.direction_alignment}"
+            f"({row.disclosure_lag_days} days later) · {esc_md(row.direction_alignment)}"
         )
-        st.markdown(row.summary)
-        report_file = REPO_ROOT / (row.report_path or "")
-        if row.report_path and report_file.exists():
+        st.markdown(esc_md(row.summary))
+        report_file = (
+            REPO_ROOT / row.report_path if isinstance(row.report_path, str) else None
+        )
+        if report_file is not None and report_file.exists():
             import frontmatter
 
-            post = frontmatter.loads(report_file.read_text())
+            report_text = report_file.read_text()
+            post = frontmatter.loads(report_text)
             st.divider()
-            st.markdown(post.content)
+            st.markdown(esc_md(post.content))
+            st.download_button(
+                "⬇ Download report (.md)",
+                data=report_text,
+                file_name=report_file.name,
+                mime="text/markdown",
+                key=f"dl-{key_prefix}-{row.trade_id}",
+            )
 
 
 # ---------------------------------------------------------------- header
@@ -233,7 +255,7 @@ if people:
 if chambers:
     view = view[view.chamber.isin(chambers)]
 if ticker_q:
-    view = view[view.ticker.fillna("").str.upper().str.contains(ticker_q)]
+    view = view[view.ticker.fillna("").str.upper().str.contains(ticker_q, regex=False)]
 if direction:
     view = view[view.transaction_type.isin(direction)]
 view = view[view.interest_score >= min_score]
@@ -253,12 +275,12 @@ with tab_hot:
     else:
         st.caption(f"{len(hot)} trades at or above {HOT_THRESHOLD}, newest first.")
         for _, row in hot.iterrows():
-            render_trade(row)
+            render_trade(row, key_prefix="hot")
 
 with tab_feed:
     st.caption(f"{len(view)} analyzed trades, most interesting first.")
     for _, row in view.iterrows():
-        render_trade(row)
+        render_trade(row, key_prefix="feed")
 
 with tab_table:
     table = view[
@@ -278,10 +300,14 @@ with tab_table:
             "summary",
         ]
     ]
-    st.dataframe(
+    st.caption("Select a row to download its report.")
+    event = st.dataframe(
         table,
         width="stretch",
         hide_index=True,
+        on_select="rerun",
+        selection_mode="single-row",
+        key="table-select",
         column_config={
             "interest_score": st.column_config.ProgressColumn(
                 "Interest", min_value=0, max_value=100, format="%.0f"
@@ -298,3 +324,19 @@ with tab_table:
             "summary": st.column_config.TextColumn("Summary", width="large"),
         },
     )
+    selected = event.selection.rows if event and event.selection else []
+    if selected:
+        sel_row = view.iloc[selected[0]]
+        sel_report = (
+            REPO_ROOT / sel_row.report_path if isinstance(sel_row.report_path, str) else None
+        )
+        if sel_report is not None and sel_report.exists():
+            st.download_button(
+                f"⬇ Download {display_ticker(sel_row)} report (.md)",
+                data=sel_report.read_text(),
+                file_name=sel_report.name,
+                mime="text/markdown",
+                key="dl-table",
+            )
+        else:
+            st.caption("No report file for that row.")
