@@ -37,6 +37,10 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          NOTIFY_EMAILS: ${{ secrets.NOTIFY_EMAILS }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          DASHBOARD_URL: ${{ vars.DASHBOARD_URL }}
         run: politrack cycle
 
       - name: Run backfill
@@ -44,6 +48,10 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          NOTIFY_EMAILS: ${{ secrets.NOTIFY_EMAILS }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          DASHBOARD_URL: ${{ vars.DASHBOARD_URL }}
         run: politrack backfill --count ${{ github.event.inputs.backfill_count }}
 
       - name: Commit data and reports

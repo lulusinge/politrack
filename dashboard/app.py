@@ -2,107 +2,144 @@
 
 from __future__ import annotations
 
-import json
+import re
 import sqlite3
-import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import pandas as pd
 import streamlit as st
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(REPO_ROOT / "src"))
-
 DB_PATH = REPO_ROOT / "data" / "politrack.db"
 
-st.set_page_config(page_title="PoliTrack — politician trades", page_icon="🏛️", layout="wide")
+HOT_THRESHOLD = 70
+
+st.set_page_config(
+    page_title="PoliTrack — politician trades",
+    page_icon="🏛️",
+    layout="wide",
+    menu_items={"about": "PoliTrack — AI-analyzed politician trading disclosures."},
+)
+
+st.markdown(
+    """
+    <style>
+      #MainMenu, footer {visibility: hidden;}
+      .stAppDeployButton {display: none;}
+      div[data-testid="stMetric"] {
+        background: #1A1F2B;
+        border: 1px solid #2A3140;
+        border-radius: 10px;
+        padding: 12px 16px;
+      }
+      div[data-testid="stExpander"] {
+        border: 1px solid #2A3140;
+        border-radius: 10px;
+      }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+def _ro() -> sqlite3.Connection:
+    conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
+    conn.row_factory = sqlite3.Row
+    return conn
 
 
 @st.cache_data(ttl=60)
 def load_feed() -> pd.DataFrame:
     if not DB_PATH.exists():
         return pd.DataFrame()
-    conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
-    try:
+    with sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True) as conn:
         return pd.read_sql_query(
             """SELECT t.id AS trade_id, t.person_name, t.chamber, t.ticker,
                       t.asset_description, t.transaction_type, t.amount_range,
-                      t.trade_date, t.disclosure_date, t.disclosure_lag_days,
+                      t.amount_mid, t.trade_date, t.disclosure_date,
+                      t.disclosure_lag_days,
                       a.insider_edge_score, a.alpha_remaining_score, a.legislative_score,
-                      a.interest_score, a.direction_alignment, a.summary, a.report_path
+                      a.interest_score, a.direction_alignment, a.summary, a.report_path,
+                      a.created_at AS analyzed_at
                FROM analyses a
                JOIN trades t ON t.id = a.trade_id
                WHERE t.status = 'analyzed'
                ORDER BY a.interest_score DESC, t.disclosure_date DESC""",
             conn,
         )
-    finally:
-        conn.close()
 
 
 @st.cache_data(ttl=60)
-def load_health() -> dict:
+def load_stats() -> dict:
     if not DB_PATH.exists():
         return {}
-    conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
-    conn.row_factory = sqlite3.Row
-    try:
+    day_ago = (datetime.now(timezone.utc) - timedelta(hours=24)).isoformat()
+    two_days_ago = (datetime.now(timezone.utc) - timedelta(hours=48)).isoformat()
+    with _ro() as conn:
+        q = lambda sql, *p: conn.execute(sql, p).fetchone()[0]  # noqa: E731
         run = conn.execute("SELECT * FROM runs ORDER BY id DESC LIMIT 1").fetchone()
-        pending = conn.execute(
-            "SELECT COUNT(*) c FROM trades WHERE status = 'pending'"
-        ).fetchone()["c"]
-        analyzed = conn.execute(
-            "SELECT COUNT(*) c FROM trades WHERE status = 'analyzed'"
-        ).fetchone()["c"]
         stale = {}
         for src, col in [("House", "house_ok"), ("Senate", "senate_ok"), ("OGE", "oge_ok")]:
-            row = conn.execute(
-                f"SELECT MAX(id) FROM runs WHERE {col} = 1"
-            ).fetchone()
-            last_ok_id = row[0]
-            latest_id = run["id"] if run else None
-            stale[src] = (
-                None
-                if last_ok_id is None or latest_id is None
-                else latest_id - last_ok_id
-            )
+            last_ok = q(f"SELECT MAX(id) FROM runs WHERE {col} = 1")
+            stale[src] = None if (last_ok is None or run is None) else run["id"] - last_ok
         return {
-            "run": dict(run) if run else None,
-            "pending": pending,
-            "analyzed": analyzed,
+            "analyzed_24h": q(
+                "SELECT COUNT(*) FROM analyses WHERE created_at >= ?", day_ago
+            ),
+            "analyzed_prev_24h": q(
+                "SELECT COUNT(*) FROM analyses WHERE created_at >= ? AND created_at < ?",
+                two_days_ago,
+                day_ago,
+            ),
+            "hot_total": q(
+                """SELECT COUNT(*) FROM analyses a JOIN trades t ON t.id = a.trade_id
+                   WHERE t.status = 'analyzed' AND a.interest_score >= ?""",
+                HOT_THRESHOLD,
+            ),
+            "filings_24h": q(
+                "SELECT COUNT(*) FROM filings WHERE first_seen_at >= ?", day_ago
+            ),
+            "pending": q("SELECT COUNT(*) FROM trades WHERE status = 'pending'"),
+            "volume_analyzed": q(
+                """SELECT COALESCE(SUM(t.amount_mid), 0) FROM trades t
+                   JOIN analyses a ON a.trade_id = t.id WHERE t.status = 'analyzed'"""
+            ),
+            "last_cycle": (run["finished_at"] or run["started_at"]) if run else None,
             "cycles_since_ok": stale,
         }
+
+
+def subscribe(email: str, threshold: int) -> str:
+    if not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email):
+        return "That doesn't look like an email address."
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        conn.execute(
+            """INSERT INTO subscribers (email, threshold, created_at) VALUES (?, ?, ?)
+               ON CONFLICT(email) DO UPDATE SET threshold = excluded.threshold""",
+            (email.strip().lower(), threshold, datetime.now(timezone.utc).isoformat()),
+        )
+        conn.commit()
     finally:
         conn.close()
+    load_stats.clear()
+    return f"Subscribed: {email} (threshold ≥ {threshold})"
 
 
-def render_health(health: dict) -> None:
-    run = health.get("run")
-    cols = st.columns([2, 1, 1, 1, 1, 1])
-    if run:
-        finished = run.get("finished_at") or run.get("started_at") or ""
-        cols[0].caption(f"Last cycle: {finished} UTC")
-    else:
-        cols[0].caption("No watcher cycles recorded yet")
-    for i, src in enumerate(["House", "Senate", "OGE"]):
-        behind = health.get("cycles_since_ok", {}).get(src)
-        if behind is None:
-            label = "○ never polled"
-        elif behind == 0:
-            label = "● healthy"
-        else:
-            label = f"◐ {behind} cycles behind"
-        cols[i + 1].caption(f"{src}: {label}")
-    cols[4].caption(f"Analyzed: {health.get('analyzed', 0)}")
-    cols[5].caption(f"Queue: {health.get('pending', 0)}")
+def score_label(score: float) -> str:
+    if score >= HOT_THRESHOLD:
+        return f"🔥 :red[**{score:.0f}**]"
+    if score >= 40:
+        return f":orange[**{score:.0f}**]"
+    return f":gray[**{score:.0f}**]"
 
 
 def render_trade(row: pd.Series) -> None:
     direction = "🟢 BUY" if row.transaction_type == "purchase" else "🔴 SELL"
     ticker = row.ticker or (row.asset_description or "")[:24]
     header = (
-        f"**{row.interest_score:.0f}** · {ticker} · {direction} · "
+        f"{score_label(row.interest_score)} · **{ticker}** · {direction} · "
         f"{row.person_name} ({row.chamber}) · {row.amount_range}"
     )
     with st.expander(header):
@@ -125,24 +162,45 @@ def render_trade(row: pd.Series) -> None:
             st.markdown(post.content)
 
 
-st.title("🏛️ PoliTrack")
-st.caption(
-    "Stocks surfaced from US politician trading disclosures — House, Senate, and "
-    "executive branch — analyzed by an AI research agent. Not investment advice."
-)
+# ---------------------------------------------------------------- header
+left, right = st.columns([3, 1])
+with left:
+    st.title("🏛️ PoliTrack")
+    st.caption(
+        "Stocks surfaced from US politician trading disclosures — House, Senate "
+        "and executive branch — analyzed by an AI research agent. Not investment advice."
+    )
 
-health = load_health()
-render_health(health)
+stats = load_stats()
+if stats:
+    delta = stats["analyzed_24h"] - stats["analyzed_prev_24h"]
+    c = st.columns(5)
+    c[0].metric("Analyzed (24h)", stats["analyzed_24h"], delta=delta or None)
+    c[1].metric(f"Hot trades (≥{HOT_THRESHOLD})", stats["hot_total"])
+    c[2].metric("New filings (24h)", stats["filings_24h"])
+    c[3].metric("Queue", stats["pending"])
+    vol = stats["volume_analyzed"]
+    vol_label = f"${vol / 1e6:,.1f}M" if vol >= 1e6 else f"${vol / 1e3:,.0f}K"
+    c[4].metric("Volume analyzed", vol_label)
+
+    health_bits = []
+    for src, behind in stats["cycles_since_ok"].items():
+        dot = "🟢" if behind == 0 else ("⚪" if behind is None else "🟠")
+        health_bits.append(f"{dot} {src}")
+    last = (stats["last_cycle"] or "never").replace("T", " ").split("+")[0]
+    st.caption("  ·  ".join(health_bits) + f"  ·  last cycle {last} UTC")
+
 st.divider()
 
 df = load_feed()
 if df.empty:
     st.info(
-        "No analyzed trades yet. Run `politrack cycle` (or `politrack backfill --count 100`) "
-        "to populate the feed."
+        "No analyzed trades yet. Run `politrack cycle` (or `politrack backfill "
+        "--count 100`) to populate the feed."
     )
     st.stop()
 
+# ---------------------------------------------------------------- sidebar
 with st.sidebar:
     st.header("Filters")
     people = st.multiselect("Person", sorted(df.person_name.dropna().unique()))
@@ -150,6 +208,24 @@ with st.sidebar:
     ticker_q = st.text_input("Ticker contains").strip().upper()
     min_score = st.slider("Min interest score", 0, 100, 0)
     direction = st.multiselect("Direction", sorted(df.transaction_type.dropna().unique()))
+
+    st.divider()
+    st.header("🔔 Notifications")
+    st.caption(
+        "Get an email when a newly analyzed trade crosses your threshold. "
+        "Sent by the watcher on its next cycle."
+    )
+    email = st.text_input("Email", placeholder="you@example.com")
+    threshold = st.slider("Notify at score ≥", 40, 95, HOT_THRESHOLD, step=5)
+    if st.button("Subscribe", width="stretch"):
+        if email:
+            st.success(subscribe(email, threshold))
+        else:
+            st.warning("Enter an email first.")
+    st.caption(
+        "Requires SMTP credentials on the watcher (`SMTP_USER`/`SMTP_PASS`, "
+        "e.g. a Gmail app password) — see README."
+    )
 
 view = df
 if people:
@@ -162,16 +238,63 @@ if direction:
     view = view[view.transaction_type.isin(direction)]
 view = view[view.interest_score >= min_score]
 
-st.subheader(f"Feed — {len(view)} trades")
-tab_feed, tab_table = st.tabs(["Feed", "Table"])
+# ---------------------------------------------------------------- tabs
+tab_hot, tab_feed, tab_table = st.tabs(["🔥 Hot", "Feed", "Table"])
+
+with tab_hot:
+    hot = view[view.interest_score >= HOT_THRESHOLD].sort_values(
+        ["analyzed_at", "interest_score"], ascending=[False, False]
+    )
+    if hot.empty:
+        st.caption(
+            f"Nothing above {HOT_THRESHOLD} right now — that's normal: most "
+            "disclosed trades are routine rebalances. The watcher checks every 30 minutes."
+        )
+    else:
+        st.caption(f"{len(hot)} trades at or above {HOT_THRESHOLD}, newest first.")
+        for _, row in hot.iterrows():
+            render_trade(row)
 
 with tab_feed:
+    st.caption(f"{len(view)} analyzed trades, most interesting first.")
     for _, row in view.iterrows():
         render_trade(row)
 
 with tab_table:
+    table = view[
+        [
+            "interest_score",
+            "ticker",
+            "person_name",
+            "chamber",
+            "transaction_type",
+            "amount_range",
+            "trade_date",
+            "disclosure_date",
+            "disclosure_lag_days",
+            "insider_edge_score",
+            "alpha_remaining_score",
+            "legislative_score",
+            "summary",
+        ]
+    ]
     st.dataframe(
-        view.drop(columns=["report_path"]),
-        use_container_width=True,
+        table,
+        width="stretch",
         hide_index=True,
+        column_config={
+            "interest_score": st.column_config.ProgressColumn(
+                "Interest", min_value=0, max_value=100, format="%.0f"
+            ),
+            "person_name": "Person",
+            "transaction_type": "Direction",
+            "amount_range": "Amount",
+            "trade_date": "Traded",
+            "disclosure_date": "Disclosed",
+            "disclosure_lag_days": "Lag (d)",
+            "insider_edge_score": "Edge",
+            "alpha_remaining_score": "Alpha left",
+            "legislative_score": "Legislative",
+            "summary": st.column_config.TextColumn("Summary", width="large"),
+        },
     )

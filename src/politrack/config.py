@@ -32,6 +32,15 @@ MAX_ANALYSES_PER_CYCLE = int(os.getenv("MAX_ANALYSES_PER_CYCLE", "0"))  # 0 = un
 MAX_EXTRACT_ATTEMPTS = 3
 MAX_ANALYZE_ATTEMPTS = 3
 
+# Notifications (email digest when a trade scores above the threshold)
+NOTIFY_THRESHOLD = float(os.getenv("NOTIFY_THRESHOLD", "70"))
+NOTIFY_EMAILS = [e.strip() for e in os.getenv("NOTIFY_EMAILS", "").split(",") if e.strip()]
+SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
+SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
+SMTP_USER = os.getenv("SMTP_USER", "")
+SMTP_PASS = os.getenv("SMTP_PASS", "")
+DASHBOARD_URL = os.getenv("DASHBOARD_URL", "")
+
 # Source polling
 HOUSE_INDEX_URL = "https://disclosures-clerk.house.gov/public_disc/financial-pdfs/{year}FD.zip"
 HOUSE_PTR_PDF_URL = "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/{year}/{doc_id}.pdf"

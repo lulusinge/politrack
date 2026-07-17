@@ -8,7 +8,7 @@ import sqlite3
 import traceback
 from datetime import date
 
-from . import config, db, extract
+from . import config, db, extract, notify
 from .analysis import agent, report
 from .models import FilingExtraction, amount_midpoint
 from .sources import house, oge, senate
@@ -219,6 +219,12 @@ def run_cycle(
                 errors.append(f"analyze trade {trade['id']}: {e}")
                 traceback.print_exc()
 
+    # 4. Notify subscribers about newly analyzed hot trades
+    try:
+        notify.notify_hot_trades(conn)
+    except Exception as e:
+        errors.append(f"notify: {e}")
+
     conn.execute(
         """UPDATE runs SET finished_at = ?, house_ok = ?, senate_ok = ?, oge_ok = ?,
            new_filings = ?, trades_extracted = ?, analyses_run = ?, errors = ? WHERE id = ?""",
@@ -278,6 +284,11 @@ def run_backfill(count: int = 100) -> dict:
             print(f"analyzed trade {trade['id']} ({trade['ticker'] or trade['asset_description']})")
         except Exception as e:
             print(f"analyze trade {trade['id']} failed: {e}")
+
+    try:
+        notify.notify_hot_trades(conn)
+    except Exception as e:
+        print(f"notify failed: {e}")
 
     conn.close()
     return stats

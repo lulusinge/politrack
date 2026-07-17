@@ -80,6 +80,21 @@ CREATE TABLE IF NOT EXISTS runs (
   errors TEXT
 );
 
+CREATE TABLE IF NOT EXISTS subscribers (
+  id INTEGER PRIMARY KEY,
+  email TEXT NOT NULL UNIQUE,
+  threshold REAL NOT NULL DEFAULT 70,
+  created_at TEXT
+);
+
+CREATE TABLE IF NOT EXISTS notifications (
+  id INTEGER PRIMARY KEY,
+  trade_id INTEGER NOT NULL REFERENCES trades(id),
+  email TEXT NOT NULL,
+  sent_at TEXT,
+  UNIQUE (trade_id, email)
+);
+
 CREATE INDEX IF NOT EXISTS idx_trades_status ON trades(status);
 CREATE INDEX IF NOT EXISTS idx_trades_person ON trades(person_name);
 """
