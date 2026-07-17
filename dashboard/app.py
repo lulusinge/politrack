@@ -17,7 +17,7 @@ HOT_THRESHOLD = 70
 
 st.set_page_config(
     page_title="PoliTrack — politician trades",
-    page_icon="🏛️",
+    page_icon="P",
     layout="wide",
     menu_items={"about": "PoliTrack — AI-analyzed politician trading disclosures."},
 )
@@ -141,14 +141,14 @@ def display_ticker(row: pd.Series, width: int = 24) -> str:
 
 def score_label(score: float) -> str:
     if score >= HOT_THRESHOLD:
-        return f"🔥 :red[**{score:.0f}**]"
+        return f":red[**{score:.0f}**]"
     if score >= 40:
         return f":orange[**{score:.0f}**]"
     return f":gray[**{score:.0f}**]"
 
 
 def render_trade(row: pd.Series, key_prefix: str = "feed") -> None:
-    direction = "🟢 BUY" if row.transaction_type == "purchase" else "🔴 SELL"
+    direction = ":green[**BUY**]" if row.transaction_type == "purchase" else ":red[**SELL**]"
     ticker = display_ticker(row)
     header = (
         f"{score_label(row.interest_score)} · **{ticker}** · {direction} · "
@@ -176,7 +176,7 @@ def render_trade(row: pd.Series, key_prefix: str = "feed") -> None:
             st.divider()
             st.markdown(esc_md(post.content))
             st.download_button(
-                "⬇ Download report (.md)",
+                "Download report (.md)",
                 data=report_text,
                 file_name=report_file.name,
                 mime="text/markdown",
@@ -187,7 +187,7 @@ def render_trade(row: pd.Series, key_prefix: str = "feed") -> None:
 # ---------------------------------------------------------------- header
 left, right = st.columns([3, 1])
 with left:
-    st.title("🏛️ PoliTrack")
+    st.title("PoliTrack")
     st.caption(
         "Stocks surfaced from US politician trading disclosures — House, Senate "
         "and executive branch — analyzed by an AI research agent. Not investment advice."
@@ -207,7 +207,7 @@ if stats:
 
     health_bits = []
     for src, behind in stats["cycles_since_ok"].items():
-        dot = "🟢" if behind == 0 else ("⚪" if behind is None else "🟠")
+        dot = ":green[●]" if behind == 0 else (":gray[●]" if behind is None else ":orange[●]")
         health_bits.append(f"{dot} {src}")
     last = (stats["last_cycle"] or "").replace("T", " ").split("+")[0]
     updated = f"  ·  updated {last} UTC" if last else ""
@@ -230,7 +230,7 @@ with st.sidebar:
     direction = st.multiselect("Direction", sorted(df.transaction_type.dropna().unique()))
 
     st.divider()
-    st.header("🔔 Notifications")
+    st.header("Notifications")
     st.caption("Get an email whenever a new trade crosses your interest threshold.")
     email = st.text_input("Email", placeholder="you@example.com")
     threshold = st.slider("Notify at score ≥", 40, 95, HOT_THRESHOLD, step=5)
@@ -252,7 +252,7 @@ if direction:
 view = view[view.interest_score >= min_score]
 
 # ---------------------------------------------------------------- tabs
-tab_hot, tab_feed, tab_table = st.tabs(["🔥 Hot", "Feed", "Table"])
+tab_hot, tab_feed, tab_table = st.tabs(["Hot", "Feed", "Table"])
 
 with tab_hot:
     hot = view[view.interest_score >= HOT_THRESHOLD].sort_values(
@@ -323,7 +323,7 @@ with tab_table:
         )
         if sel_report is not None and sel_report.exists():
             st.download_button(
-                f"⬇ Download {display_ticker(sel_row)} report (.md)",
+                f"Download {display_ticker(sel_row)} report (.md)",
                 data=sel_report.read_text(),
                 file_name=sel_report.name,
                 mime="text/markdown",
@@ -347,7 +347,7 @@ with tab_table:
             for f in report_files:
                 zf.write(f, arcname=f.name)
         st.download_button(
-            f"⬇ Download all {len(report_files)} reports (.zip)",
+            f"Download all {len(report_files)} reports (.zip)",
             data=buf.getvalue(),
             file_name="politrack-reports.zip",
             mime="application/zip",
