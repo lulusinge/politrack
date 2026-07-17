@@ -1,0 +1,12 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+data/pdfs/
+data/logs/
+data/.lock
+.pytest_cache/
+.DS_Store
+data/politrack.db-wal
+data/politrack.db-shm

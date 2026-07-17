@@ -1,0 +1,11 @@
+{
+  "draw": 1,
+  "recordsTotal": 5,
+  "recordsFiltered": 5,
+  "result": "ok",
+  "data": [
+    ["Thomas H", "Tuberville", "Tuberville, Tommy (Senator)", "<a href=\"/search/view/ptr/392ac3e5-07f6-4f8c-840f-84e9066ffb29/\" target=\"_blank\">Periodic Transaction Report for 07/16/2026</a>", "07/16/2026"],
+    ["John", "Boozman", "Boozman, John (Senator)", "<a href=\"/search/view/ptr/c52854ed-a778-483a-883c-0ba2bba17877/\" target=\"_blank\">Periodic Transaction Report for 07/13/2026</a>", "07/13/2026"],
+    ["Jane", "Doe", "Doe, Jane (Senator)", "<a href=\"/search/view/paper/aaaa1111-2222-3333-4444-555566667777/\" target=\"_blank\">Periodic Transaction Report for 07/01/2026</a>", "07/01/2026"]
+  ]
+}

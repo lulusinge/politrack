@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="robots" content="noindex">
+<title>US Office of Government Ethics: Presidential Nominee and Appointee Request System: Online OGE Form 201</title><link rel="stylesheet" type="text/css" href="/201/Presiden.nsf/common.css" /><script type="text/javascript" src="/201/Presiden.nsf/common.js?OpenJavascriptLibrary"></script><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/><!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. --><script async type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=OGE" id="_fed_an_ua_tag"></script><link rel="stylesheet" type="text/css" href="/201/Presiden.nsf/common.css" /><meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<script language="JavaScript" type="text/javascript">
+<!-- 
+function setdataset(txt) {
+ alert('hi mom, made it: Index-' + txt);
+ var viewtit = "Index-" + txt;
+ document.getElementById("viewtit").innerHTML
+ 
+}
+
+function calc()
+{
+  if (document.getElementById('isselected').checked) 
+  {
+alert('hi mom is checked');
+  } else {
+alert('hi mom not checked');
+  }
+}
+
+function showhideoverlay ()
+{
+	var thediv=document.getElementById('archiveoverlay');
+	var whr = window.location.href
+	var chr = "w"
+	var n = whr.lastIndexOf(".nsf");
+	var sl = whr.length
+	var exc = sl-n;
+/* alert('onload ; ' + whr.length);  */
+	if(whr.length > 85)
+	{
+/*  	alert("onload whr: " + whr.length); */
+	document.getElementById("archiveoverlay").style.display = "none";
+	}
+}
+
+var Form = {
+  reset: function(form) {
+    $(form).reset();
+    document.getElementById("ln").innerHTML = "";
+   document.getElementById("lnid").innerHTML = "";
+    return form;
+  },
+
+  serializeElements: function(elements) {
+    return elements.inject([], function(queryComponents, element) {
+      var queryComponent = Form.Element.serialize(element);
+      if (queryComponent) queryComponents.push(queryComponent);
+      return queryComponents;
+    }).join('&');
+  }
+};
+
+// Pass the checkbox name to the function
+function getCheckedBoxes(chkboxName) {
+  var checkboxes = document.getElementsByName(chkboxName);
+  var checkboxesChecked = [];
+  // loop over them all
+ var checkedValue = null; 
+ 
+ // get first half for display, all for hidden
+ 
+ var lines = ""
+ var dlines = ""
+ var cks = 0
+  for (var i=0; i<checkboxes.length; i++) {
+
+     // And stick the checked ones onto an array...
+     if (checkboxes[i].checked) {
+       cks = cks + 1;
+     checkedValue = checkboxes[i].value;
+	var res = checkedValue.split("~");
+        checkboxesChecked.push(checkboxes[i]);
+	dlines = dlines+ "<br/>" + res[0];
+        lines = lines + "<br/>" + checkedValue;
+     }
+  }
+  	if(cks > 20){ alert("You have exceeded the 20 record selection limit. Please select fewer records");	}
+	else
+	{
+	  document.getElementById("ln").innerHTML = dlines
+	  document.getElementById("lnid").innerHTML = lines
+	}
+}
+// -->
+</script>
+
+<script language="JavaScript" type="text/javascript">
+<!-- 
+document._domino_target = "_self";
+function _doClick(v, o, t) {
+  var returnValue = false;
+  var url="/201/Presiden.nsf/PAS%20Filings%20by%20Date?OpenView&Click=" + v;
+  if (o.href != null) {
+    o.href = url;
+    returnValue = true;
+  } else {
+    if (t == null)
+      t = document._domino_target;
+    window.open(url, t);
+  }
+  return returnValue;
+}
+// -->
+</script>
+</head>
+<body text="#000000" bgcolor="#FFFFFF" onload=" showhideoverlay ();">
+
+<form action=""><div id="archiveoverlay">
+<a href="/201/Presiden.nsf"><img src="/201/Presiden.nsf/OGE-Logo-Transparent-for-Web.png" style="margin-left:20%; margin-top:35px; height:100px;"  alt="United States office of Government Ethics, Preventing Conflicts of Interest in the Excutive Branch"></a>
+	<h1>Public Financial Disclosure Reports</h1><hr style="margin-left:auto;margin-right:auto; width:1000px;">	
+<div id="archivecontent">
+<p>Title 1 of the Ethics in Government Act of 1978, as amended, 5 U.S.C. app. § 105(c), states that:
+<ol type="1" id="myol">
+	<li>It shall be unlawful for any person to obtain or use a report:
+<div style="margin-left:25px;">(A) for any unlawful purpose;</div>
+<div style="margin-left:25px;">(B) for any commercial purpose, other than by news and communications media for dissemination to the general public;</div>
+<div style="margin-left:25px;">(C) for determining or establishing the credit rating of any individual; or</div>
+<div style="margin-left:25px;">(D) for use, directly or indirectly, in the solicitation of money for any political, charitable, or other purpose.</div>
+<br/>
+	<li>The Attorney General may bring a civil action against any person who obtains or uses a report for any purpose prohibited in paragraph (1) of this subsection. The court in which such action is brought may assess against such person a penalty in any amount not to exceed $11,000. Such remedy shall be in addition to any other remedy available under statutory or common law.</li>
+</ol>
+<p><br/><button type="button" style="margin-left:50px;" class="myButton" onclick='return clicker();'>I am aware of these prohibitions and wish to proceed.</button>
+</p>
+</div>
+</div>
+	<div id="topbarcontent">
+	<a href="/201/Presiden.nsf"><img src="/201/Presiden.nsf/OGE-Logo-Transparent-for-Web.png" style="margin-top:35px; height:100px; padding-right:20px;"  alt="United States office of Government Ethics, Preventing Conflicts of Interest in the Excutive Branch"></a>
+	</div>
+</div>
+<div id="bodycontent">
+<div style="margin:auto; width:960px; margin-top:30px;">
+<h1>Public Financial Disclosure Reports</h1><font face="Calibri">Certified reports listed here are those submitted by executive branch officials occupying positions for which the pay is set at Levels 1 and 2 of the Executive Schedule.  Click </font><a href="/201/Presiden.nsf/President%20and%20Vice%20President%20Index"><font face="Calibri">here</font></a><font face="Calibri"> for reports submitted by the President and Vice President.  </font><font face="Calibri">These reports can be downloaded without completing an OGE Form 201.</font><br>
+<font size="2" face="Verdana">For </font><b><font size="2" face="Verdana">Ethics Agreements</font></b><font size="2" face="Verdana"> please use the </font><a href="/201/Presiden.nsf/PAS%20Index?OpenView"><font size="2" face="Verdana">Alphabetical Index</font></a><font size="2" face="Verdana"> of filings.</font><br>
+<br>
+<font size="2" face="Verdana">* Use the Online </font><a href="/201/Presiden.nsf/f53dcc215a28dcbb85258ccb0066175a?OpenForm"><font size="2" color="#0000FF" face="Verdana">OGE Form 201</font></a><font size="2" face="Verdana"> to request reports on other covered executives.</font><br>
+<font size="2" face="Verdana">** A list of new Nominees and Confirmations can be obtained from the Senate's &quot;</font><a href="http://www.senate.gov/legislative/nom_confc.htm"><font size="2" face="Verdana">Nominations Confirmed (Civilians)</font></a><font size="2" face="Verdana">&quot; website. </font><br>
+<br>
+<font size="2">(969 entries in this collection) </font><hr><div id="index">
+<table border="0" cellpadding="2" cellspacing="0">
+<tr valign="top"><td nowrap><font size="2" face="Verdana">07/16/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/E13AFDFA4891B3C185258E36002D8874/$FILE/Mody, Arjun - Final EA Certification (3).pdf'>Certification of Ethics Agreement Compliance</a></font></td><td nowrap><font size="2" face="Verdana">Mody, Arjun</font></td><td nowrap><font size="2" face="Verdana">Social Security Administration</font></td><td nowrap><font size="2" face="Verdana">Deputy Commissioner</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">07/15/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/ADE89624CD8D7F1D85258E35002DD6B1/$FILE/Sean-McMaster-06.11.2026-278T.pdf'>278 Transaction (06/11/2026)</a></font></td><td nowrap><font size="2" face="Verdana">McMaster, Sean</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Highway Administration</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">07/15/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/35548DC3322E8D4A85258E35002DD6AA/$FILE/Sean-McMaster-2026-278ANNU.pdf'>Annual (2026)</a></font></td><td nowrap><font size="2" face="Verdana">McMaster, Sean</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Highway Administration</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">07/15/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/D87640BF89C748E285258E35002DCCEE/$FILE/Michael-J-Kratsios-2026-278ANNU.pdf'>Annual (2026)</a></font></td><td nowrap><font size="2" face="Verdana">Kratsios, Michael J</font></td><td nowrap><font size="2" face="Verdana">Office of Science and Technology Policy</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">07/14/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18F5580FCB502CA685258E34002D9F29/$FILE/Michael-Barr-2026-278ANNU.pdf'>Annual (2026)</a></font></td><td nowrap><font size="2" face="Verdana">Barr, Michael</font></td><td nowrap><font size="2" face="Verdana">Federal Reserve System Board of Governors</font></td><td nowrap><font size="2" face="Verdana">Governor &amp; Vice Chairman for Supervision</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">07/11/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F4060C7CB31DC8DA85258E31002DCF6A/$FILE/Michael-Kratsios-06.10.2026-278T.pdf'>278 Transaction (06/10/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Kratsios, Michael J</font></td><td nowrap><font size="2" face="Verdana">Office of Science and Technology Policy</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">07/03/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/17E740413EA73B3485258E29002D9F37/$FILE/Blanche, Todd  final278.pdf'>Nominee 278 (06/30/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Blanche, Todd</font></td><td nowrap><font size="2" face="Verdana">Department of Justice</font></td><td nowrap><font size="2" face="Verdana">Attorney General</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">07/01/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18EEC1F42BF175A385258E27002DD95F/$FILE/Keith-Sonderling-2026-278ANNU.pdf'>Annual (2026)</a></font></td><td nowrap><font size="2" face="Verdana">Sonderling, Keith</font></td><td nowrap><font size="2" face="Verdana">Department of Labor</font></td><td nowrap><font size="2" face="Verdana">Deputy Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/30/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/02E52541DE059FB585258E26002D7A5F/$FILE/Mullin, Markwayne - Final EA Certification.pdf'>Certification of Ethics Agreement Compliance</a></font></td><td nowrap><font size="2" face="Verdana">Mullin, Markwayne</font></td><td nowrap><font size="2" face="Verdana">Department of Homeland Security</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/25/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/1172B1A86AB0DFB485258E21002DDE72/$FILE/Eric-M-Ueland-2026-278ANNU.pdf'>Annual (2026)</a></font></td><td nowrap><font size="2" face="Verdana">Ueland, Eric M</font></td><td nowrap><font size="2" face="Verdana">Office of Management and Budget</font></td><td nowrap><font size="2" face="Verdana">Deputy Director for Management</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/25/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/DFE6C822A84970A185258E21002D9F28/$FILE/Doug-Collins-2026-278ANNU.pdf'>Annual (2026)</a></font></td><td nowrap><font size="2" face="Verdana">Collins, Doug</font></td><td nowrap><font size="2" face="Verdana">Department of Veterans Affairs</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/25/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/087E5C60EB9CFD9D85258E21002D974C/$FILE/Michelle-White-Bowman-2026-278ANNU.pdf'>Annual (2026)</a></font></td><td nowrap><font size="2" face="Verdana">Bowman, Michelle White</font></td><td nowrap><font size="2" face="Verdana">Federal Reserve System Board of Governors</font></td><td nowrap><font size="2" face="Verdana">Governor &amp; Vice Chairman for Supervision</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/19/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/53EE41481937FAD385258E1B002DD1C4/$FILE/Jerome-H-Powell-2026-278ANNU.pdf'>Annual (2026)</a></font></td><td nowrap><font size="2" face="Verdana">Powell, Jerome H</font></td><td nowrap><font size="2" face="Verdana">Federal Reserve System Board of Governors</font></td><td nowrap><font size="2" face="Verdana">Governor &amp; Chairman</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/19/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/7EF92B7367FCF69785258E1B002DA16D/$FILE/Clayton, Walter Joseph  final278.pdf'>Nominee 278 (06/17/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Clayton, Walter J</font></td><td nowrap><font size="2" face="Verdana">Office of Director of National Intelligence</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/19/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/38EA82FE3A777CF385258E1B002D9C4C/$FILE/Brooke, Francis  final278.pdf'>Nominee 278 (06/16/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Brooke, Francis</font></td><td nowrap><font size="2" face="Verdana">Department of the Treasury</font></td><td nowrap><font size="2" face="Verdana">Deputy Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/18/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/A30668A7B4A01CB685258E1A002DBF7B/$FILE/Jared-Isaacman-05.27.2026-278T.pdf'>278 Transaction (05/27/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Isaacman, Jared</font></td><td nowrap><font size="2" face="Verdana">National Aeronautics and Space Administration</font></td><td nowrap><font size="2" face="Verdana">Administrator</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/18/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/177A97DE3C6AC8FB85258E1A002DA9FC/$FILE/Lisa-Cook-2026-278ANNU.pdf'>Annual (2026)</a></font></td><td nowrap><font size="2" face="Verdana">Cook, Lisa</font></td><td nowrap><font size="2" face="Verdana">Federal Reserve System Board of Governors</font></td><td nowrap><font size="2" face="Verdana">Governor 2</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/17/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/C06D0FB3778D205785258E19002DB273/$FILE/Hamilton, Cameron.  final278.pdf'>Nominee 278 (06/11/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Hamilton, Cameron</font></td><td nowrap><font size="2" face="Verdana">Department of Homeland Security</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Emergency Management Agency</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/11/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/140F5B270926CCF185258E13002DC28C/$FILE/Troy-Meink-2026-278ANNU.pdf'>Annual (2026)</a></font></td><td nowrap><font size="2" face="Verdana">Meink, Troy</font></td><td nowrap><font size="2" face="Verdana">Department of The Air Force</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/11/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/7F5276881004F82A85258E13002D93A3/$FILE/Sara-Bailey-04.01.2026-278T.pdf'>278 Transaction (04/01/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Bailey, Sara</font></td><td nowrap><font size="2" face="Verdana">Office of National Drug Control Policy</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/10/2026</font></td><td nowrap><font size="2" face="Verdana"><b>Certificate of Divestiture </b>OGE-2026-079 &amp; 080 (<a href='/201/Presiden.nsf/201 Request?OpenForm&Filer=Mullin'>OGE Form 201 required)</a></font></td><td nowrap><font size="2" face="Verdana">Mullin, Markwayne</font></td><td nowrap><font size="2" face="Verdana">Department of Homeland Security</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/09/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F82BAFBCBD8EA33685258E11002D9D35/$FILE/Cavanaugh, Brian  final278.pdf'>Nominee 278 (06/05/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Cavanaugh, Brian</font></td><td nowrap><font size="2" face="Verdana">Department of Homeland Security</font></td><td nowrap><font size="2" face="Verdana">Under Secretary for Management</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/05/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/20DBB4C97563F8DE85258E0D002DCD7A/$FILE/John-Phelan-03.12.2026-278T(2).pdf'>278 Transaction (03/12/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Phelan, John</font></td><td nowrap><font size="2" face="Verdana">Department of The Navy</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/05/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/E3BE4EA1BA0AC06885258E0D002DCD71/$FILE/John-Phelan-03.12.2026-278T(1).pdf'>278 Transaction (03/12/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Phelan, John</font></td><td nowrap><font size="2" face="Verdana">Department of The Navy</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/05/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/0F85366E7CCB5CD685258E0D002DCD69/$FILE/Phelan, Christopher  final278.pdf'>Nominee 278 (06/02/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Phelan, Christopher</font></td><td nowrap><font size="2" face="Verdana">Council of Economic Advisers</font></td><td nowrap><font size="2" face="Verdana">Member &amp; Chairman</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/04/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/DF33C1065800EF1785258E0C002DCF2D/$FILE/John-Phelan-03.12.2026-278T(3).pdf'>278 Transaction (03/12/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Phelan, John</font></td><td nowrap><font size="2" face="Verdana">Department of The Navy</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/04/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/8FC040FFB2095EC685258E0C002DCF26/$FILE/John-Phelan-05.12.2026-278T(1).pdf'>278 Transaction (05/12/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Phelan, John</font></td><td nowrap><font size="2" face="Verdana">Department of The Navy</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/04/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/D17D53F736AD393B85258E0C002DCF1F/$FILE/John-Phelan-05.12.2026-278T.pdf'>278 Transaction (05/12/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Phelan, John</font></td><td nowrap><font size="2" face="Verdana">Department of The Navy</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/04/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/E39628A503BB83E685258E0C002DCEFA/$FILE/John-Phelan-10.02.2025-278T.pdf'>278 Transaction (10/02/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Phelan, John</font></td><td nowrap><font size="2" face="Verdana">Department of The Navy</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">06/04/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/1B659395608E910985258E0C002DB804/$FILE/Philip-Jefferson-2026-278ANNU.pdf'>Annual (2026)</a></font></td><td nowrap><font size="2" face="Verdana">Jefferson, Philip</font></td><td nowrap><font size="2" face="Verdana">Federal Reserve System Board of Governors</font></td><td nowrap><font size="2" face="Verdana">Governor &amp; Vice Chairman</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">05/27/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/A9F88F6167796EF985258E04002DDA12/$FILE/Lee-Zeldin-2026-278ANNU.pdf'>Annual (2026)</a></font></td><td nowrap><font size="2" face="Verdana">Zeldin, Lee</font></td><td nowrap><font size="2" face="Verdana">Environmental Protection Agency</font></td><td nowrap><font size="2" face="Verdana">Administrator</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">05/27/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/E02BB5E9D673CA7085258E04002DCCD7/$FILE/Marco-Rubio-2026-278ANNU.pdf'>Annual (2026)</a></font></td><td nowrap><font size="2" face="Verdana">Rubio, Marco</font></td><td nowrap><font size="2" face="Verdana">Department of State</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">05/22/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/DC3783D3D22CADA585258DFF002DCC65/$FILE/John-Phelan-05.20.2025-278T.pdf'>278 Transaction (05/20/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Phelan, John</font></td><td nowrap><font size="2" face="Verdana">Department of The Navy</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">05/22/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/54391EB52FBB07E285258DFF002DCC5D/$FILE/John-Phelan-11.17.2025-278T(2).pdf'>278 Transaction (11/17/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Phelan, John</font></td><td nowrap><font size="2" face="Verdana">Department of The Navy</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">05/22/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/D4C0F2BBEEBBBA6485258DFF002DB9DB/$FILE/Joseph-Kent-2026-278TERM.pdf'>Termination</a></font></td><td nowrap><font size="2" face="Verdana">Kent, Joseph</font></td><td nowrap><font size="2" face="Verdana">Office of Director of National Intelligence</font></td><td nowrap><font size="2" face="Verdana">Director, National Counterterrorism Center</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">05/21/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/4AFD3C0AAAA300E285258DFE002D984E/$FILE/Douglas-J-Burgum-02.27.2026-278T.pdf'>278 Transaction (02/27/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Burgum, Douglas J</font></td><td nowrap><font size="2" face="Verdana">Department of The Interior</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">05/21/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/2D5091957BD9067A85258DFE002D961A/$FILE/Steven-G-Bradbury-2026-278ANNU.pdf'>Annual (2026)</a></font></td><td nowrap><font size="2" face="Verdana">Bradbury, Steven G</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Deputy Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">05/20/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/C46F139E1EB98CC185258DFD002D7618/$FILE/Mody, Arjun - Final EA Certification (2).pdf'>Certification of Ethics Agreement Compliance</a></font></td><td nowrap><font size="2" face="Verdana">Mody, Arjun</font></td><td nowrap><font size="2" face="Verdana">Social Security Administration</font></td><td nowrap><font size="2" face="Verdana">Deputy Commissioner</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">05/19/2026</font></td><td nowrap><font size="2" face="Verdana"><b>Certificate of Divestiture </b>OGE-2026-069 &amp; 070 (<a href='/201/Presiden.nsf/201 Request?OpenForm&Filer=Warsh'>OGE Form 201 required)</a></font></td><td nowrap><font size="2" face="Verdana">Warsh, Kevin</font></td><td nowrap><font size="2" face="Verdana">Federal Reserve System Board of Governors</font></td><td nowrap><font size="2" face="Verdana">Governor &amp; Chairman</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">05/15/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/3994CCA837D635C785258DF8002DCADF/$FILE/O'Neill, James Brendan  final278.pdf'>Nominee 278 (05/12/2026)</a></font></td><td nowrap><font size="2" face="Verdana">O'Neill, James B</font></td><td nowrap><font size="2" face="Verdana">National Science Foundation</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">05/13/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18CD4C6636DA236785258DF6002DA466/$FILE/Duncan, Harold P.  final278.pdf'>Nominee 278 (05/06/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Duncan, Harold P</font></td><td nowrap><font size="2" face="Verdana">Office of Management and Budget</font></td><td nowrap><font size="2" face="Verdana">Deputy Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">05/01/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/574C5AAD33A157FE85258DEA002DB4F0/$FILE/Scott-A-Kupor-04.20.2026-278T.pdf'>278 Transaction (04/20/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Kupor, Scott A</font></td><td nowrap><font size="2" face="Verdana">Office of Personnel Management</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">04/25/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/A3B6063812E5B0AE85258DE4002DC573/$FILE/John-Phelan-03.12.2026-278T.pdf'>278 Transaction (03/12/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Phelan, John</font></td><td nowrap><font size="2" face="Verdana">Department of The Navy</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">04/25/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/4B988978D7A864F785258DE4002DBF44/$FILE/Stephen-I-Miran-04.03.2026-278T.pdf'>278 Transaction (04/03/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Miran, Stephen I</font></td><td nowrap><font size="2" face="Verdana">Federal Reserve System Board of Governors</font></td><td nowrap><font size="2" face="Verdana">Governor</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">04/24/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/42EE48DB2D051C2C85258DE3002D5E39/$FILE/Bailey (Carter), Sare - Final EA Certification.pdf'>Certification of Ethics Agreement Compliance</a></font></td><td nowrap><font size="2" face="Verdana">Bailey, Sara</font></td><td nowrap><font size="2" face="Verdana">Office of National Drug Control Policy</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">04/18/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F02A64BD0118A78E85258DDD002D7DA7/$FILE/Miran, Stephen - Final EA Certification.pdf'>Certification of Ethics Agreement Compliance</a></font></td><td nowrap><font size="2" face="Verdana">Miran, Stephen I</font></td><td nowrap><font size="2" face="Verdana">Federal Reserve System Board of Governors</font></td><td nowrap><font size="2" face="Verdana">Governor</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">04/17/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/26AA499A708D62B285258DDC002DD79C/$FILE/Stephen-A-Vaden-03.19.2026-278T.pdf'>278 Transaction (03/19/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Vaden, Stephen A</font></td><td nowrap><font size="2" face="Verdana">Department of Agriculture</font></td><td nowrap><font size="2" face="Verdana">Deputy Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">04/17/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/C4BF8463CF0AE7AE85258DDC002DBBFB/$FILE/Michael-J-Kratsios-03.29.2026-278T.pdf'>278 Transaction (03/29/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Kratsios, Michael J</font></td><td nowrap><font size="2" face="Verdana">Office of Science and Technology Policy</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">04/17/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/2D566015C161DDA885258DDC002DB5D1/$FILE/Jared-Isaacman-03.16.2026-278T.pdf'>278 Transaction (03/16/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Isaacman, Jared</font></td><td nowrap><font size="2" face="Verdana">National Aeronautics and Space Administration</font></td><td nowrap><font size="2" face="Verdana">Administrator</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">04/14/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F57618ED6E5F30B585258DD9002DD780/$FILE/Warsh, Kevin  final278.pdf'>Nominee 278 (04/10/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Warsh, Kevin</font></td><td nowrap><font size="2" face="Verdana">Federal Reserve System Board of Governors</font></td><td nowrap><font size="2" face="Verdana">Governor &amp; Chairman</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">04/10/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/FE0053885B75FD0E85258DD5002DC5B4/$FILE/Marcus-Molinaro-2026-278TERM.pdf'>Termination</a></font></td><td nowrap><font size="2" face="Verdana">Molinaro, Marcus</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Transit Administration</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">04/10/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/3F589CB2A272619D85258DD5002DC58C/$FILE/Arjun-Mody-02.27.2026-278T.pdf'>278 Transaction (02/27/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Mody, Arjun</font></td><td nowrap><font size="2" face="Verdana">Social Security Administration</font></td><td nowrap><font size="2" face="Verdana">Deputy Commissioner</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">04/09/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/EC797C6A3CC5ABA085258DD4002D9D81/$FILE/Bryan-Bedford-02.27.2026-278T.pdf'>278 Transaction (02/27/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Bedford, Bryan</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Aviation Administration</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">04/01/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/22F95E0EAFBF6F1D85258DCC002DDF75/$FILE/Christopher-A-Wright-01.13.2026-278T.pdf'>278 Transaction (01/13/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Wright, Christopher A</font></td><td nowrap><font size="2" face="Verdana">Department of Energy</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">04/01/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/3A9FB168C78ABC2885258DCC002DDC8D/$FILE/Eric-Scott-Turner-01.16.2026-278T.pdf'>278 Transaction (01/16/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Turner, Eric Scott</font></td><td nowrap><font size="2" face="Verdana">Department of Housing and Urban Development</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">04/01/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/6669428412F0329885258DCC002DC6FF/$FILE/Sean-McMaster-02.27.2026-278T.pdf'>278 Transaction (02/27/2026)</a></font></td><td nowrap><font size="2" face="Verdana">McMaster, Sean</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Highway Administration</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">04/01/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/6439C8BBFB85065585258DCC002DC69B/$FILE/Linda-McMahon-07.02.2025-278T.pdf'>278 Transaction (07/02/2025)</a></font></td><td nowrap><font size="2" face="Verdana">McMahon, Linda E</font></td><td nowrap><font size="2" face="Verdana">Department of Education</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">03/27/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/5206C7E80483D38F85258DC7002D8040/$FILE/Mody, Arjun - Final EA Certification.pdf'>Certification of Ethics Agreement Compliance</a></font></td><td nowrap><font size="2" face="Verdana">Mody, Arjun</font></td><td nowrap><font size="2" face="Verdana">Social Security Administration</font></td><td nowrap><font size="2" face="Verdana">Deputy Commissioner</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">03/26/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/68666D69BEFB693D85258DC6002DC641/$FILE/John-Phelan-01.09.2026-278T.pdf'>278 Transaction (01/09/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Phelan, John</font></td><td nowrap><font size="2" face="Verdana">Department of The Navy</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">03/26/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F6D5E76DFD84296785258DC6002DC61D/$FILE/John-Phelan-10.02.2025-278T(2).pdf'>278 Transaction (10/02/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Phelan, John</font></td><td nowrap><font size="2" face="Verdana">Department of The Navy</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">03/25/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/FD3C31C15743BF8185258DC5002D83AD/$FILE/Phelan, John - Final EA Certification.pdf'>Certification of Ethics Agreement Compliance</a></font></td><td nowrap><font size="2" face="Verdana">Phelan, John</font></td><td nowrap><font size="2" face="Verdana">Department of The Navy</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">03/24/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/16199B7CCAB78DF985258DC4002D750D/$FILE/Isaacman Jared - Final EA Certification.pdf'>Certification of Ethics Agreement Compliance</a></font></td><td nowrap><font size="2" face="Verdana">Isaacman, Jared</font></td><td nowrap><font size="2" face="Verdana">National Aeronautics and Space Administration</font></td><td nowrap><font size="2" face="Verdana">Administrator</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">03/18/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/6DC06006E0C3364C85258DBE00531737/$FILE/Mullin, Markwayne final278.pdf'>Nominee 278 (03/17/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Mullin, Markwayne</font></td><td nowrap><font size="2" face="Verdana">Department of Homeland Security</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">03/18/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/3E556084F6CDBC6685258DBE002D7F7D/$FILE/Ryan McCormack - Final EA Certification.pdf'>Certification of Ethics Agreement Compliance</a></font></td><td nowrap><font size="2" face="Verdana">McCormack, Ryan</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Under Secretary for Policy</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">03/14/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/7593B0EA0A3AF52085258DBA002EE4AC/$FILE/Scott-A-Kupor-02.06.2026-278T.pdf'>278 Transaction (02/06/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Kupor, Scott A</font></td><td nowrap><font size="2" face="Verdana">Office of Personnel Management</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">03/14/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/21AEDE83A27031A285258DBA002D6121/$FILE/Bedford, Bryan - Final EA Certification (2).pdf'>Certification of Ethics Agreement Compliance</a></font></td><td nowrap><font size="2" face="Verdana">Bedford, Bryan</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Aviation Administration</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">03/13/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/E3D897DB72CEF27F85258DB9002EEB15/$FILE/Sean-McMaster-01.20.2026-278T.pdf'>278 Transaction (01/20/2026)</a></font></td><td nowrap><font size="2" face="Verdana">McMaster, Sean</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Highway Administration</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">03/07/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/3B5D301E5EACE5C885258DB300345F78/$FILE/Scott-A-Kupor-01.09.2026-278T.pdf'>278 Transaction (01/09/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Kupor, Scott A</font></td><td nowrap><font size="2" face="Verdana">Office of Personnel Management</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">03/06/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/FCD5083EB618F35085258DB200344824/$FILE/Frank-J-Bisignano-02.10.2026-278T.pdf'>278 Transaction (02/10/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Bisignano, Frank J</font></td><td nowrap><font size="2" face="Verdana">Social Security Administration</font></td><td nowrap><font size="2" face="Verdana">Commissioner</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">02/27/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/DFA1DC5E6B4CE0BF85258DAB00346FD8/$FILE/John-Phelan-07.28.2025-278T(2).pdf'>278 Transaction (07/28/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Phelan, John</font></td><td nowrap><font size="2" face="Verdana">Department of The Navy</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">02/27/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/687996565E337F3385258DAB00346FB5/$FILE/John-Phelan-11.17.2025-278T(1).pdf'>278 Transaction (11/17/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Phelan, John</font></td><td nowrap><font size="2" face="Verdana">Department of The Navy</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">02/10/2026</font></td><td nowrap><font size="2" face="Verdana"><b>Certificate of Divestiture </b>OGE-2026-022 (<a href='/201/Presiden.nsf/201 Request?OpenForm&Filer=Isaacman'>OGE Form 201 required)</a></font></td><td nowrap><font size="2" face="Verdana">Isaacman, Jared</font></td><td nowrap><font size="2" face="Verdana">National Aeronautics and Space Administration</font></td><td nowrap><font size="2" face="Verdana">Administrator</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">01/30/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/E0F6CD03D5B35F9785258D8F003461CE/$FILE/Scott-A-Kupor-10.08.2025-278T.pdf'>278 Transaction (10/08/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Kupor, Scott A</font></td><td nowrap><font size="2" face="Verdana">Office of Personnel Management</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">01/27/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/11B539874B68444985258D8C00346658/$FILE/Sean-McMaster-12.01.2025-278T.pdf'>278 Transaction (12/01/2025)</a></font></td><td nowrap><font size="2" face="Verdana">McMaster, Sean</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Highway Administration</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">01/27/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/14687F0C20F84C2385258D8C00346652/$FILE/Sean-McMaster-12.11.2025-278T.pdf'>278 Transaction (12/11/2025)</a></font></td><td nowrap><font size="2" face="Verdana">McMaster, Sean</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Highway Administration</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">01/27/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/D7C2637F0A46A2D985258D8C003460DE/$FILE/Michael-J-Kratsios-01.10.2026-278T.pdf'>278 Transaction (01/10/2026)</a></font></td><td nowrap><font size="2" face="Verdana">Kratsios, Michael J</font></td><td nowrap><font size="2" face="Verdana">Office of Science and Technology Policy</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">01/21/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/0C3C58070E6F7EB785258D8600347079/$FILE/Samantha-Power-2025-278TERM.pdf'>Termination</a></font></td><td nowrap><font size="2" face="Verdana">Power, Samantha</font></td><td nowrap><font size="2" face="Verdana">Agency for International Development (AID)</font></td><td nowrap><font size="2" face="Verdana">Administrator</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">01/21/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/056ABAA54A1FAC1585258D8600344DDF/$FILE/Douglas-J-Burgum-11.13.2025-278T.pdf'>278 Transaction (11/13/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Burgum, Douglas J</font></td><td nowrap><font size="2" face="Verdana">Department of The Interior</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">01/21/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/BC33926D1346296F85258D86003449A3/$FILE/Bryan-Bedford-11.03.2025-278T.pdf'>278 Transaction (11/03/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Bedford, Bryan</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Aviation Administration</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">01/17/2026</font></td><td nowrap><font size="2" face="Verdana"><b>Certificate of Divestiture </b>OGE-2026-006, 007 &amp; 008 (<a href='/201/Presiden.nsf/201 Request?OpenForm&Filer=Mody'>OGE Form 201 required)</a></font></td><td nowrap><font size="2" face="Verdana">Mody, Arjun</font></td><td nowrap><font size="2" face="Verdana">Social Security Administration</font></td><td nowrap><font size="2" face="Verdana">Deputy Commissioner</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">01/06/2026</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/2B716301C2D9B9D585258D7700345AA8/$FILE/Sean-McMaster-09.29.2025-278T.pdf'>278 Transaction (09/29/2025)</a></font></td><td nowrap><font size="2" face="Verdana">McMaster, Sean</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Highway Administration</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">12/31/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/86C03B37455893E185258D710034584A/$FILE/Stephen-I-Miran-12.03.2025-278T.pdf'>278 Transaction (12/03/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Miran, Stephen I</font></td><td nowrap><font size="2" face="Verdana">Federal Reserve System Board of Governors</font></td><td nowrap><font size="2" face="Verdana">Governor</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">12/31/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/FEB1C36F302B4E7385258D7100345286/$FILE/Scott-A-Kupor-07.28.2025-278T.pdf'>278 Transaction (07/28/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Kupor, Scott A</font></td><td nowrap><font size="2" face="Verdana">Office of Personnel Management</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">12/31/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/FE9B4FD2E26CCFAC85258D7100343B09/$FILE/Scott-Bessent-12.05.2025-278T.pdf'>278 Transaction (12/05/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Bessent, Scott</font></td><td nowrap><font size="2" face="Verdana">Department of The Treasury</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">12/30/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/AF38D959D8C9900085258D7000345AA1/$FILE/Sethuraman-Panchanathan-2025-278TERM.pdf'>Termination</a></font></td><td nowrap><font size="2" face="Verdana">Panchanathan, Sethuraman</font></td><td nowrap><font size="2" face="Verdana">National Science Foundation</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">12/19/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/1B3A289F103446F685258D6500343C16/$FILE/Bryan-Bedford-10.07.2025-278T.pdf'>278 Transaction (10/07/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Bedford, Bryan</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Aviation Administration</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">12/16/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/4DD7F2D0C4E86F6685258D620032F076/$FILE/Trainor, Craig - Fianl EA Certification.pdf'>Certification of Ethics Agreement Compliance</a></font></td><td nowrap><font size="2" face="Verdana">McMaster, Sean</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Highway Administration</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">12/16/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F13CE7858810B83685258D620032EFC3/$FILE/McMaster, Sean - Final EA Certification.pdf'>Certification of Ethics Agreement Compliance</a></font></td><td nowrap><font size="2" face="Verdana">McMaster, Sean</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Highway Administration</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">12/13/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/FCA8E4D588C234CD85258D5F00343F83/$FILE/Frank-J-Bisignano-08.08.2025-278T.pdf'>278 Transaction (08/08/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Bisignano, Frank J</font></td><td nowrap><font size="2" face="Verdana">Social Security Administration</font></td><td nowrap><font size="2" face="Verdana">Commissioner</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">12/13/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/AA16C26F767256C285258D5F00343F7B/$FILE/Frank-J-Bisignano-09.09.2025-278T.pdf'>278 Transaction (09/09/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Bisignano, Frank J</font></td><td nowrap><font size="2" face="Verdana">Social Security Administration</font></td><td nowrap><font size="2" face="Verdana">Commissioner</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">12/10/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/8C12E5475578E84385258D5C00345940/$FILE/Howard-Lutnick-11.05.2025-278T.pdf'>278 Transaction (11/05/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Lutnick, Howard</font></td><td nowrap><font size="2" face="Verdana">Department of Commerce</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">12/08/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/DC3A93B67DC095C685258D5A00555853/$FILE/Bessent, Scott - Final EA Certification(3).pdf'>Certification of Ethics Agreement Compliance</a></font></td><td nowrap><font size="2" face="Verdana">Bessent, Scott</font></td><td nowrap><font size="2" face="Verdana">Department of The Treasury</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">11/27/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F3E4FE48A7ADA0E285258D4F00319101/$FILE/Scott-A-Kupor-09.26.2025-278T.pdf'>278 Transaction (09/26/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Kupor, Scott A</font></td><td nowrap><font size="2" face="Verdana">Office of Personnel Management</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">11/27/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/7C0B79B66E94715885258D4F00317C5D/$FILE/Doug-Burgum-09.18.2025-278T.pdf'>278 Transaction (09/18/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Burgum, Douglas J</font></td><td nowrap><font size="2" face="Verdana">Department of The Interior</font></td><td nowrap><font size="2" face="Verdana">Secretary</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">11/27/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/2D38D470438A3C4A85258D4F00317899/$FILE/Bryan-Bedford-09.02.2025-278T.pdf'>278 Transaction (09/02/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Bedford, Bryan</font></td><td nowrap><font size="2" face="Verdana">Department of Transportation</font></td><td nowrap><font size="2" face="Verdana">Administrator, Federal Aviation Administration</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">11/25/2025</font></td><td nowrap><font size="2" face="Verdana"><b>Certificate of Divestiture </b>OGE-2025-224 (<a href='/201/Presiden.nsf/201 Request?OpenForm&Filer=Cairncross'>OGE Form 201 required)</a></font></td><td nowrap><font size="2" face="Verdana">Cairncross, Sean S</font></td><td nowrap><font size="2" face="Verdana">Office of the National Cyber Director</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">11/19/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/8CDF168F02E70FF885258D47003182FD/$FILE/Isaacman, Jared T.  final278.pdf'>Nominee 278 (11/17/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Isaacman, Jared</font></td><td nowrap><font size="2" face="Verdana">National Aeronautics and Space Administration</font></td><td nowrap><font size="2" face="Verdana">Administrator</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">11/18/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/1F2CA5D27DDE1D9085258D460031984D/$FILE/Lee-Zeldin-09-24-2025-278T.pdf'>278 Transaction (09/24/2025)</a></font></td><td nowrap><font size="2" face="Verdana">Zeldin, Lee</font></td><td nowrap><font size="2" face="Verdana">Environmental Protection Agency</font></td><td nowrap><font size="2" face="Verdana">Administrator</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">11/15/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/80BC56C8C4F88EDE85258D430031ABAB/$FILE/Cairncross, Sean - Final EA Certfication.pdf'>Certification of Ethics Agreement Compliance</a></font></td><td nowrap><font size="2" face="Verdana">Cairncross, Sean S</font></td><td nowrap><font size="2" face="Verdana">Office of the National Cyber Director</font></td><td nowrap><font size="2" face="Verdana">Director</font></td></tr>
+
+<tr valign="top"><td nowrap><font size="2" face="Verdana">11/15/2025</font></td><td nowrap><font size="2" face="Verdana"><a href='https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/79B6D1BA0CC8C9A085258D43003191D2/$FILE/Adriana-Kugler-2025-278ANNTERM.pdf'>Annual Term</a></font></td><td nowrap><font size="2" face="Verdana">Kugler, Adriana</font></td><td nowrap><font size="2" face="Verdana">Federal Reserve System Board of Governors</font></td><td nowrap><font size="2" face="Verdana">Governor</font></td></tr></table></body></html>

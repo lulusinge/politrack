@@ -1,0 +1,23 @@
+Prefix	Last	First	Suffix	FilingType	StateDst	Year	FilingDate	DocID
+	Aaron	Richard		W	MI04	2026	4/15/2026	8068
+	Abdulle	Abdisallam		C	MN02	2026	6/11/2026	10078673
+	Abdulle	Abdisallam		X	MN02	2026	5/20/2026	30028196
+	Abel	William P.		C	TX31	2026	5/13/2026	10078016
+	Abu-Ghazalah	Maad		C	NC07	2026	5/13/2026	10077852
+	Acevedo-Arreguin	Luis Antonio		C	CA18	2026	5/2/2026	10076549
+	Adair	Patti		C	OR05	2026	5/5/2026	10076351
+Mr.	Ager	Jamie Peterson		C	NC11	2026	6/15/2026	10079888
+	Akin	Ammie		C	AL07	2026	6/30/2026	10081152
+Hon.	Alford	Mark		P	MO04	2026	3/31/2026	20034201
+	Ali	Mussab		C	NJ08	2026	5/4/2026	10076653
+	Allen	Mary Theresa		C	IN08	2026	4/30/2026	9115800
+Hon.	Allen	Richard W.		P	GA12	2026	1/15/2026	20033751
+Hon.	Allen	Richard W.		P	GA12	2026	2/17/2026	20033945
+Hon.	Allen	Richard W.		P	GA12	2026	3/11/2026	20034133
+Hon.	Allen	Richard W.		P	GA12	2026	5/4/2026	20034315
+Hon.	Allen	Richard W.		P	GA12	2026	6/5/2026	20034473
+Hon.	Allen	Richard W.		P	GA12	2026	6/16/2026	20034740
+Hon.	Allen	Richard W.		P	GA12	2026	7/15/2026	20034945
+Hon.	Alford	Mark		P	MO04	2026	3/31/2026	20034201
+Hon.	Allen	Richard W.		P	GA12	2026	1/15/2026	20033751
+Hon.	Allen	Richard W.		P	GA12	2026	2/17/2026	20033945
