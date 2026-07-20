@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 1.0
 alpha_remaining_score: 3.0
 legislative_score: 0.0
-interest_score: 7.0
+interest_score: 3.0
 generated_at: '2026-07-17T11:58:51+00:00'
 ---
 
 # John Boozman: purchase PALL ($1,001 - $15,000)
 
-**Interest score: 7/100** — Buy of a physical-palladium ETF is a generic commodity/inflation diversifier, with no identifiable thesis or legislative catalyst tied to Boozman's roles.
+**Interest score: 3/100** — Buy of a physical-palladium ETF is a generic commodity/inflation diversifier, with no identifiable thesis or legislative catalyst tied to Boozman's roles.
 
 ## Summary
 

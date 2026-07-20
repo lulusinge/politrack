@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 2.0
 alpha_remaining_score: 2.0
 legislative_score: 1.0
-interest_score: 15.0
+interest_score: 6.0
 generated_at: '2026-07-17T12:01:09+00:00'
 ---
 
 # Thomas H Tuberville: sale ACN - Accenture plc Class A Ordinary Shares (Ireland) ($1,001 - $15,000)
 
-**Interest score: 15/100** — Sale aligned with a subsequent 16% decline in ACN, but the drop is coincidental to a batch rebalance rather than evidence of a conviction bearish view.
+**Interest score: 6/100** — Sale aligned with a subsequent 16% decline in ACN, but the drop is coincidental to a batch rebalance rather than evidence of a conviction bearish view.
 
 ## Summary
 

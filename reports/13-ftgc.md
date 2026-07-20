@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 2.0
 alpha_remaining_score: 2.0
 legislative_score: 0.0
-interest_score: 6.0
+interest_score: 2.0
 generated_at: '2026-07-17T11:57:55+00:00'
 ---
 
 # John Boozman: partial_sale FTGC ($1,001 - $15,000)
 
-**Interest score: 6/100** — Sale of a broad commodity ETF that then rose +5.5% — the trade direction ran opposite to subsequent performance, indicating no informational edge.
+**Interest score: 2/100** — Sale of a broad commodity ETF that then rose +5.5% — the trade direction ran opposite to subsequent performance, indicating no informational edge.
 
 ## Summary
 

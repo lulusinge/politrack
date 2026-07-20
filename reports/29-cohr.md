@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 1.0
 alpha_remaining_score: 2.0
 legislative_score: 0.0
-interest_score: 8.0
+interest_score: 3.0
 generated_at: '2026-07-17T11:52:15+00:00'
 ---
 
 # Sheldon Whitehouse: purchase COHR ($15,001 - $50,000)
 
-**Interest score: 8/100** — Buy of an AI-datacenter optics name that has since fallen ~32% — the bullish direction has been contradicted, not confirmed.
+**Interest score: 3/100** — Buy of an AI-datacenter optics name that has since fallen ~32% — the bullish direction has been contradicted, not confirmed.
 
 ## Summary
 

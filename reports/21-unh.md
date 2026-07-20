@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 2.5
 alpha_remaining_score: 3.0
 legislative_score: 1.0
-interest_score: 16.0
+interest_score: 8.0
 generated_at: '2026-07-17T12:03:06+00:00'
 ---
 
 # John Boozman: purchase UNH ($1,001 - $15,000)
 
-**Interest score: 16/100** — Buy aligned with a UNH recovery thesis — the stock rebounded +8.85% vs SPY between trade and disclosure and beat earnings on July 16, but the move is largely realized.
+**Interest score: 8/100** — Buy aligned with a UNH recovery thesis — the stock rebounded +8.85% vs SPY between trade and disclosure and beat earnings on July 16, but the move is largely realized.
 
 ## Summary
 

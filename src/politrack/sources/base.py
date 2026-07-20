@@ -22,6 +22,6 @@ class Source(Protocol):
         """Return refs for recent filings. Dedup happens downstream in the DB."""
         ...
 
-    def fetch_document(self, ref_row: dict) -> tuple[bytes, str]:
+    def fetch_document(self, doc_url: str) -> tuple[bytes, str]:
         """Download the filing document. Returns (content, doc_kind)."""
         ...

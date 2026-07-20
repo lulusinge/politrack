@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 0.5
 alpha_remaining_score: 1.0
 legislative_score: 0.0
-interest_score: 3.0
+interest_score: 1.0
 generated_at: '2026-07-17T11:59:36+00:00'
 ---
 
 # John Boozman: purchase SCHP ($1,001 - $15,000)
 
-**Interest score: 3/100** — Buy of a TIPS ETF is a generic inflation hedge with no identifiable directional thesis tied to non-public information.
+**Interest score: 1/100** — Buy of a TIPS ETF is a generic inflation hedge with no identifiable directional thesis tied to non-public information.
 
 ## Summary
 

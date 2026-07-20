@@ -71,19 +71,24 @@ pytest                           # offline parser tests
 
 ## Email notifications
 
-The watcher emails a digest whenever a newly analyzed trade crosses a threshold
-(default 70). Two ways to subscribe:
+The watcher broadcasts a digest via [Buttondown](https://buttondown.com)
+whenever a newly analyzed trade crosses `NOTIFY_THRESHOLD` (default 70).
+Buttondown owns the subscriber list, double opt-in, and unsubscribe links —
+no email addresses ever touch this codebase, its database, or the repo.
 
-- **Dashboard sidebar** → 🔔 Notifications (writes to the `subscribers` table).
-- **Env var** `NOTIFY_EMAILS=you@example.com` on the watcher (comma-separated;
-  add it as an Actions secret for cloud runs).
+Setup:
 
-Sending requires SMTP credentials on the watcher: `SMTP_USER` + `SMTP_PASS`
-(for Gmail, create an app password at myaccount.google.com/apppasswords;
-defaults to `smtp.gmail.com:587`, override with `SMTP_HOST`/`SMTP_PORT`).
-Optionally set `DASHBOARD_URL` so emails link back to the feed, and
-`NOTIFY_THRESHOLD` to change the default. Each trade is emailed at most once
-per recipient (tracked in the `notifications` table).
+1. Create a Buttondown account (free up to 100 subscribers) and copy the API
+   key from Settings.
+2. Watcher: set `BUTTONDOWN_API_KEY` (Actions secret for cloud runs).
+   Optionally `DASHBOARD_URL` so digests link back to the feed and
+   `NOTIFY_THRESHOLD` to change the bar.
+3. Dashboard: set `BUTTONDOWN_USERNAME` (Streamlit app secret) to your
+   newsletter slug — the sidebar then shows an embedded signup form (hidden
+   while unset).
+
+Each trade is broadcast at most once, tracked by `trade_id` in the
+`notifications` table.
 
 ## Cost notes
 

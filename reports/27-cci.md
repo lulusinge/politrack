@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 1.0
 alpha_remaining_score: 2.0
 legislative_score: 0.0
-interest_score: 6.0
+interest_score: 2.0
 generated_at: '2026-07-17T11:56:35+00:00'
 ---
 
 # Sheldon Whitehouse: sale CCI ($1,001 - $15,000)
 
-**Interest score: 6/100** — Sale of CCI with no identifiable thesis; stock was roughly flat (-1% vs SPY +2%) since the trade, so the direction implies no edge.
+**Interest score: 2/100** — Sale of CCI with no identifiable thesis; stock was roughly flat (-1% vs SPY +2%) since the trade, so the direction implies no edge.
 
 ## Summary
 

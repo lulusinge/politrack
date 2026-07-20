@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 2.0
 alpha_remaining_score: 1.5
 legislative_score: 0.0
-interest_score: 14.0
+interest_score: 5.0
 generated_at: '2026-07-17T12:02:24+00:00'
 ---
 
 # John Boozman: partial_sale BSX ($1,001 - $15,000)
 
-**Interest score: 14/100** — Partial sale ahead of an 8.6% BSX decline is directionally correct, but the drop has already fully played out.
+**Interest score: 5/100** — Partial sale ahead of an 8.6% BSX decline is directionally correct, but the drop has already fully played out.
 
 ## Summary
 

@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 1.0
 alpha_remaining_score: 2.0
 legislative_score: 0.0
-interest_score: 8.0
+interest_score: 3.0
 generated_at: '2026-07-17T09:47:01+00:00'
 ---
 
 # Thomas H Tuberville: sale WAB ($1,001 - $15,000)
 
-**Interest score: 8/100** — Sale with no discernible thesis; WAB drifted slightly negative (-0.71% vs SPY +2.12%) after the trade, roughly consistent with a passive sell but no evidence of an information edge.
+**Interest score: 3/100** — Sale with no discernible thesis; WAB drifted slightly negative (-0.71% vs SPY +2.12%) after the trade, roughly consistent with a passive sell but no evidence of an information edge.
 
 ## Summary
 

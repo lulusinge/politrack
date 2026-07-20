@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 1.0
 alpha_remaining_score: 2.0
 legislative_score: 0.0
-interest_score: 6.0
+interest_score: 2.0
 generated_at: '2026-07-17T11:57:29+00:00'
 ---
 
 # John Boozman: partial_sale TPYP ($1,001 - $15,000)
 
-**Interest score: 6/100** — Partial sale of a broad pipeline-sector ETF with no discernible directional thesis — it is one of several same-day rebalancing trades.
+**Interest score: 2/100** — Partial sale of a broad pipeline-sector ETF with no discernible directional thesis — it is one of several same-day rebalancing trades.
 
 ## Summary
 

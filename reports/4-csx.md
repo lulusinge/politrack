@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 1.0
 alpha_remaining_score: 2.0
 legislative_score: 0.0
-interest_score: 6.0
+interest_score: 2.0
 generated_at: '2026-07-17T11:53:58+00:00'
 ---
 
 # Thomas H Tuberville: sale CSX ($15,001 - $50,000)
 
-**Interest score: 6/100** — Sale is contra-directional to reality — CSX rose ~8% (vs SPY +1.8%) after he sold, so the trade showed no edge.
+**Interest score: 2/100** — Sale is contra-directional to reality — CSX rose ~8% (vs SPY +1.8%) after he sold, so the trade showed no edge.
 
 ## Summary
 

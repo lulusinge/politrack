@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 1.0
 alpha_remaining_score: 1.0
 legislative_score: 0.0
-interest_score: 5.0
+interest_score: 2.0
 generated_at: '2026-07-17T11:54:50+00:00'
 ---
 
 # Thomas H Tuberville: sale MA ($15,001 - $50,000)
 
-**Interest score: 5/100** — Sale is contra-thesis: MA rose ~13.8% after he sold (vs SPY +1.8%), so the trade was poorly timed rather than prescient.
+**Interest score: 2/100** — Sale is contra-thesis: MA rose ~13.8% after he sold (vs SPY +1.8%), so the trade was poorly timed rather than prescient.
 
 ## Summary
 

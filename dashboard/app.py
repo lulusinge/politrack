@@ -2,16 +2,34 @@
 
 from __future__ import annotations
 
-import re
+import importlib
+import io
 import sqlite3
+import sys
+import zipfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+import frontmatter
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DB_PATH = REPO_ROOT / "data" / "politrack.db"
+# All env/config comes from the watcher's config module (stdlib + dotenv only)
+# so every variable has exactly one read site and one default. The dashboard
+# runs from a bare checkout on Streamlit Cloud, so import via src/ rather than
+# requiring the package to be installed. Streamlit caches imports across
+# reruns while re-executing this script, so reload — that re-runs load_dotenv
+# and keeps .env edits live on refresh.
+sys.path.insert(0, str(REPO_ROOT / "src"))
+from politrack import config  # noqa: E402
+
+importlib.reload(config)
+DB_PATH = config.DB_PATH
+NOTIFY_THRESHOLD = config.NOTIFY_THRESHOLD
+BUTTONDOWN_USERNAME = config.BUTTONDOWN_USERNAME
+BMC_SLUG = config.BMC_SLUG
 
 HOT_THRESHOLD = 70
 
@@ -25,17 +43,104 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+      /* palette — single source of truth; --pt-accent/--pt-text mirror
+         primaryColor/textColor in .streamlit/config.toml */
+      :root {
+        --pt-muted: #8A93A6; --pt-accent: #E8A13D; --pt-text: #E8EAED;
+        --pt-ok: #3FB68B; --pt-off: #5A6372;
+      }
+
       #MainMenu, footer {visibility: hidden;}
       .stAppDeployButton {display: none;}
-      div[data-testid="stMetric"] {
-        background: #1A1F2B;
-        border: 1px solid #2A3140;
-        border-radius: 10px;
-        padding: 12px 16px;
+      header[data-testid="stHeader"] {background: transparent;}
+      .block-container {padding-top: 1.4rem; padding-bottom: 4rem; max-width: 1240px;}
+      div[data-testid="stSidebarUserContent"] {padding-top: 0;}
+      div[data-testid="stSidebarHeader"] {padding-top: 0.6rem; padding-bottom: 0;}
+
+      /* wordmark — high specificity + !important: Streamlit's own markdown
+         styles otherwise win over a bare class selector */
+      div[data-testid="stMarkdownContainer"] p.pt-overline {
+        font-size: 0.72rem !important; text-transform: uppercase;
+        letter-spacing: 0.22em; color: var(--pt-muted); font-weight: 700;
+        margin: 0 0 0.2rem 0;
       }
-      div[data-testid="stExpander"] {
+      div[data-testid="stMarkdownContainer"] h1.pt-title {
+        font-size: 2.9rem !important; font-weight: 800 !important;
+        letter-spacing: -0.02em; line-height: 1.05 !important;
+        margin: 0 0 0.3rem 0; padding: 0 !important; color: var(--pt-text);
+      }
+      div[data-testid="stMarkdownContainer"] h1.pt-title span {color: var(--pt-accent);}
+      div[data-testid="stMarkdownContainer"] p.pt-sub {
+        color: var(--pt-muted); font-size: 0.95rem !important; margin: 0; line-height: 1.55;
+      }
+      .pt-status {text-align: right; color: var(--pt-muted); font-size: 0.8rem;
+                  padding-top: 1.4rem; line-height: 1.7;}
+      .pt-dot-ok {color: var(--pt-ok);} .pt-dot-warn {color: var(--pt-accent);}
+      .pt-dot-off {color: var(--pt-off);}
+
+      /* coffee link — styled like the rest of the header, not BMC's branded image */
+      a.pt-coffee, a.pt-coffee:visited {
+        display: inline-block; margin-top: 0.6rem; padding: 0.28rem 0.85rem;
+        border: 1px solid color-mix(in srgb, var(--pt-accent) 40%, transparent);
+        border-radius: 8px;
+        color: var(--pt-accent) !important; background: transparent;
+        font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em;
+        text-decoration: none !important;
+      }
+      a.pt-coffee:hover {
+        background: color-mix(in srgb, var(--pt-accent) 8%, transparent);
+        border-color: var(--pt-accent);
+      }
+
+      /* metric cards */
+      div[data-testid="stMetric"] {
+        background: linear-gradient(180deg, #1A2030 0%, #171C28 100%);
         border: 1px solid #2A3140;
-        border-radius: 10px;
+        border-radius: 12px;
+        padding: 14px 18px 12px 18px;
+        min-height: 128px;   /* equal card heights whether or not a delta badge shows */
+      }
+      div[data-testid="stMetric"]:hover {border-color: #3A4356;}
+      [data-testid="stMetricLabel"] p {
+        font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;
+        color: var(--pt-muted); font-weight: 600;
+      }
+      [data-testid="stMetricValue"] {font-size: 1.85rem; font-weight: 650;}
+      [data-testid="stMetricDelta"] {font-size: 0.8rem;}
+      /* the rules above are sized for the header KPI row — keep the small
+         metrics inside trade-card expanders compact */
+      div[data-testid="stExpander"] div[data-testid="stMetric"] {
+        min-height: 0; padding: 12px 16px;
+      }
+      div[data-testid="stExpander"] [data-testid="stMetricValue"] {font-size: 1.35rem;}
+
+      /* trade cards */
+      div[data-testid="stExpander"] {
+        border: 1px solid #262E3D;
+        border-radius: 12px;
+        background: #141924;
+        margin-bottom: 0.55rem;
+      }
+      div[data-testid="stExpander"]:hover {
+        border-color: color-mix(in srgb, var(--pt-accent) 33%, transparent);
+      }
+      div[data-testid="stExpander"] summary {padding: 0.8rem 1rem;}
+      /* feed rows are space-padded to fixed column widths; monospace + pre
+         turns that padding into aligned columns (blotter style). If Streamlit
+         ever changes this DOM, rows fall back to collapsed single spaces. */
+      div[data-testid="stExpander"] summary [data-testid="stMarkdownContainer"] p {
+        font-family: "Source Code Pro", monospace;
+        font-size: 0.85rem;
+        white-space: pre;
+      }
+
+      /* misc */
+      hr {border-color: #232A38; margin: 1.1rem 0;}
+      button[data-baseweb="tab"] {font-size: 0.95rem; padding-top: 0.6rem; padding-bottom: 0.6rem;}
+      section[data-testid="stSidebar"] h2 {
+        font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em;
+        color: var(--pt-muted); font-weight: 700;
+        padding-top: 0.25rem; margin-top: 0;
       }
     </style>
     """,
@@ -110,21 +215,11 @@ def load_stats() -> dict:
         }
 
 
-def subscribe(email: str, threshold: int) -> str:
-    if not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email):
-        return "That doesn't look like an email address."
-    conn = sqlite3.connect(DB_PATH)
-    try:
-        conn.execute(
-            """INSERT INTO subscribers (email, threshold, created_at) VALUES (?, ?, ?)
-               ON CONFLICT(email) DO UPDATE SET threshold = excluded.threshold""",
-            (email.strip().lower(), threshold, datetime.now(timezone.utc).isoformat()),
-        )
-        conn.commit()
-    finally:
-        conn.close()
-    load_stats.clear()
-    return f"Subscribed: {email} (threshold ≥ {threshold})"
+@st.cache_data(ttl=300)
+def load_report(path_str: str, mtime: float) -> tuple[str, str]:
+    """Raw report text plus frontmatter-stripped body; mtime busts the cache on edits."""
+    text = (REPO_ROOT / path_str).read_text()
+    return text, frontmatter.loads(text).content
 
 
 def esc_md(text: str | None) -> str:
@@ -140,19 +235,35 @@ def display_ticker(row: pd.Series, width: int = 24) -> str:
 
 
 def score_label(score: float) -> str:
+    txt = f"{score:.0f}"
     if score >= HOT_THRESHOLD:
-        return f":red[**{score:.0f}**]"
-    if score >= 40:
-        return f":orange[**{score:.0f}**]"
-    return f":gray[**{score:.0f}**]"
+        color = "red"
+    elif score >= 40:
+        color = "orange"
+    else:
+        color = "gray"
+    # pad outside the markup: spaces inside **…** break markdown emphasis
+    return " " * (3 - len(txt)) + f":{color}[**{txt}**]"
+
+
+def pad(text: str, width: int) -> str:
+    """Trim (ellipsis) or pad to a fixed width for the aligned feed header."""
+    if len(text) > width:
+        text = text[: width - 1] + "…"
+    return text.ljust(width)
 
 
 def render_trade(row: pd.Series, key_prefix: str = "feed") -> None:
-    direction = ":green[**BUY**]" if row.transaction_type == "purchase" else ":red[**SELL**]"
-    ticker = display_ticker(row)
+    buy = row.transaction_type == "purchase"
+    direction = ":green[**BUY**] " if buy else ":red[**SELL**]"
+    ticker = display_ticker(row, width=10)
     header = (
-        f"{score_label(row.interest_score)} · **{ticker}** · {direction} · "
-        f"{row.person_name} ({row.chamber}) · {esc_md(row.amount_range)}"
+        f"{score_label(row.interest_score)}  "
+        f"**{ticker}**{' ' * (11 - len(ticker))} "
+        f"{direction}  "
+        f"{pad(f'{row.person_name} ({row.chamber})', 32)}  "
+        f"{esc_md(pad(row.amount_range or '?', 20))}  "
+        f"traded {row.trade_date or '?'}  disclosed {row.disclosure_date or '?'}"
     )
     with st.expander(header):
         m = st.columns(4)
@@ -169,12 +280,9 @@ def render_trade(row: pd.Series, key_prefix: str = "feed") -> None:
             REPO_ROOT / row.report_path if isinstance(row.report_path, str) else None
         )
         if report_file is not None and report_file.exists():
-            import frontmatter
-
-            report_text = report_file.read_text()
-            post = frontmatter.loads(report_text)
+            report_text, body = load_report(row.report_path, report_file.stat().st_mtime)
             st.divider()
-            st.markdown(esc_md(post.content))
+            st.markdown(esc_md(body))
             st.download_button(
                 "Download report (.md)",
                 data=report_text,
@@ -185,15 +293,48 @@ def render_trade(row: pd.Series, key_prefix: str = "feed") -> None:
 
 
 # ---------------------------------------------------------------- header
+stats = load_stats()
 left, right = st.columns([3, 1])
 with left:
-    st.title("PoliTrack")
-    st.caption(
-        "Stocks surfaced from US politician trading disclosures — House, Senate "
-        "and executive branch — analyzed by an AI research agent. Not investment advice."
+    st.markdown(
+        '<p class="pt-overline">Politician trading intelligence</p>', unsafe_allow_html=True
     )
+    st.markdown('<h1 class="pt-title">Poli<span>Track</span></h1>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="pt-sub">Stocks surfaced from US politician trading disclosures —<br/>'
+        "House, Senate and executive branch — analyzed by an AI research agent. "
+        "Not investment advice.</p>",
+        unsafe_allow_html=True,
+    )
+with right:
+    if stats:
+        dots = []
+        for src, behind in stats["cycles_since_ok"].items():
+            if behind == 0:
+                cls, state = "pt-dot-ok", "up to date"
+            elif behind is None:
+                cls, state = "pt-dot-off", "no successful update yet"
+            else:
+                cls, state = "pt-dot-warn", f"{behind} cycles behind"
+            dots.append(
+                f'<span title="{src} data source: {state}">'
+                f'<span class="{cls}">●</span> {src}</span>'
+            )
+        last = (stats["last_cycle"] or "").replace("T", " ").split("+")[0]
+        updated = f"<br/>updated {last} UTC" if last else ""
+        st.markdown(
+            f'<div class="pt-status">Data sources: &nbsp;{" &nbsp; ".join(dots)}{updated}</div>',
+            unsafe_allow_html=True,
+        )
+    if BMC_SLUG:
+        st.markdown(
+            f'<div style="text-align:right;">'
+            f'<a class="pt-coffee" href="https://buymeacoffee.com/{BMC_SLUG}" '
+            f'target="_blank" rel="noopener">Buy me a coffee</a></div>',
+            unsafe_allow_html=True,
+        )
 
-stats = load_stats()
+st.write("")
 if stats:
     delta = stats["analyzed_24h"] - stats["analyzed_prev_24h"]
     c = st.columns(5)
@@ -205,15 +346,7 @@ if stats:
     vol_label = f"${vol / 1e6:,.1f}M" if vol >= 1e6 else f"${vol / 1e3:,.0f}K"
     c[4].metric("Volume analyzed", vol_label)
 
-    health_bits = []
-    for src, behind in stats["cycles_since_ok"].items():
-        dot = ":green[●]" if behind == 0 else (":gray[●]" if behind is None else ":orange[●]")
-        health_bits.append(f"{dot} {src}")
-    last = (stats["last_cycle"] or "").replace("T", " ").split("+")[0]
-    updated = f"  ·  updated {last} UTC" if last else ""
-    st.caption("Data sources:  " + "  ·  ".join(health_bits) + updated)
-
-st.divider()
+st.write("")
 
 df = load_feed()
 if df.empty:
@@ -230,15 +363,32 @@ with st.sidebar:
     direction = st.multiselect("Direction", sorted(df.transaction_type.dropna().unique()))
 
     st.divider()
-    st.header("Notifications")
-    st.caption("Get an email whenever a new trade crosses your interest threshold.")
-    email = st.text_input("Email", placeholder="you@example.com")
-    threshold = st.slider("Notify at score ≥", 40, 95, HOT_THRESHOLD, step=5)
-    if st.button("Subscribe", width="stretch"):
-        if email:
-            st.success(subscribe(email, threshold))
-        else:
-            st.warning("Enter an email first.")
+    if BUTTONDOWN_USERNAME:
+        st.header("Notifications")
+        st.caption(
+            f"Get an email when a trade scores ≥ {NOTIFY_THRESHOLD:g}. "
+            "Powered by Buttondown; confirm via the email it sends you, "
+            "unsubscribe anytime."
+        )
+        components.html(
+            f"""
+            <form action="https://buttondown.com/api/emails/embed-subscribe/{BUTTONDOWN_USERNAME}"
+                  method="post" target="popupwindow"
+                  onsubmit="window.open('https://buttondown.com/{BUTTONDOWN_USERNAME}', 'popupwindow')"
+                  style="margin:0; display:flex; flex-direction:column; gap:8px;
+                         font-family:'Source Sans Pro',sans-serif;">
+              <input type="email" name="email" required placeholder="you@example.com"
+                     style="background:#1A1F2B; color:#E8EAED; border:1px solid #31394A;
+                            border-radius:8px; padding:9px 12px; font-size:14px;
+                            outline:none; width:100%; box-sizing:border-box;" />
+              <input type="submit" value="Subscribe"
+                     style="background:#E8A13D; color:#0E1117; border:none; cursor:pointer;
+                            border-radius:8px; padding:9px 12px; font-size:14px;
+                            font-weight:600; width:100%;" />
+            </form>
+            """,
+            height=96,
+        )
 
 view = df
 if people:
@@ -259,18 +409,45 @@ with tab_hot:
         ["analyzed_at", "interest_score"], ascending=[False, False]
     )
     if hot.empty:
-        st.caption(
-            f"Nothing above {HOT_THRESHOLD} right now — that's normal: most "
-            "disclosed trades are routine rebalances. New disclosures are checked every 30 minutes."
-        )
+        if len(view) < len(df):
+            msg = f"No trades at or above {HOT_THRESHOLD} match the current filters."
+        else:
+            msg = (
+                f"Nothing actionable above {HOT_THRESHOLD} right now — scores "
+                "measure whether you can still act on a trade, and most disclosed "
+                "moves are routine or already played out. New disclosures are "
+                "checked every 30 minutes."
+            )
+        preview = view.head(3)  # already interest_score DESC from the query
+        if not preview.empty:
+            msg += " Meanwhile, the most actionable recent trades:"
+        st.caption(msg)
+        for _, row in preview.iterrows():
+            render_trade(row, key_prefix="hot-preview")
     else:
-        st.caption(f"{len(hot)} trades at or above {HOT_THRESHOLD}, newest first.")
+        st.caption(
+            f"{len(hot)} actionable trades at or above {HOT_THRESHOLD}, newest first."
+        )
         for _, row in hot.iterrows():
             render_trade(row, key_prefix="hot")
 
 with tab_feed:
-    st.caption(f"{len(view)} analyzed trades, most interesting first.")
-    for _, row in view.iterrows():
+    sort_by = st.segmented_control(
+        "Sort",
+        ["Hottest", "Recent"],
+        default="Hottest",
+        label_visibility="collapsed",
+        required=True,
+    )
+    if sort_by == "Recent":
+        feed_view = view.sort_values(
+            ["disclosure_date", "analyzed_at"], ascending=[False, False]
+        )
+    else:
+        feed_view = view  # already interest_score DESC
+    order = "most recently disclosed" if sort_by == "Recent" else "most interesting"
+    st.caption(f"{len(feed_view)} analyzed trades, {order} first.")
+    for _, row in feed_view.iterrows():
         render_trade(row, key_prefix="feed")
 
 with tab_table:
@@ -333,9 +510,6 @@ with tab_table:
             st.caption("No report file for that row.")
 
     # Bulk download of every report currently in the filtered view
-    import io
-    import zipfile
-
     report_files = [
         REPO_ROOT / p
         for p in view.report_path.dropna().unique()

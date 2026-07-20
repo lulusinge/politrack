@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 1.0
 alpha_remaining_score: 2.0
 legislative_score: 0.0
-interest_score: 5.0
+interest_score: 2.0
 generated_at: '2026-07-17T11:55:16+00:00'
 ---
 
 # Thomas H Tuberville: sale NEE ($15,001 - $50,000)
 
-**Interest score: 5/100** — Sale is contra-signal — NEE rose ~6.4% after the sale, so the direction did not align with any downside thesis.
+**Interest score: 2/100** — Sale is contra-signal — NEE rose ~6.4% after the sale, so the direction did not align with any downside thesis.
 
 ## Summary
 

@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 2.0
 alpha_remaining_score: 3.0
 legislative_score: -1.0
-interest_score: 12.0
+interest_score: 6.0
 generated_at: '2026-07-17T11:51:36+00:00'
 ---
 
 # Sheldon Whitehouse: partial_sale NVDA ($15,001 - $50,000)
 
-**Interest score: 12/100** — Partial sale that ran counter to the outcome — NVDA rose ~3.65% (beating SPY by ~3pts) after he sold, so the direction was poorly timed rather than prescient.
+**Interest score: 6/100** — Partial sale that ran counter to the outcome — NVDA rose ~3.65% (beating SPY by ~3pts) after he sold, so the direction was poorly timed rather than prescient.
 
 ## Summary
 

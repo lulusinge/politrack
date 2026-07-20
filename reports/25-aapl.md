@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 1.0
 alpha_remaining_score: 1.0
 legislative_score: 0.0
-interest_score: 6.0
+interest_score: 2.0
 generated_at: '2026-07-17T11:52:40+00:00'
 ---
 
 # Sheldon Whitehouse: partial_sale AAPL ($15,001 - $50,000)
 
-**Interest score: 6/100** — Partial sale of AAPL that ran directly against the outcome — the stock rose ~14% after he sold, so the direction was poorly timed rather than informed.
+**Interest score: 2/100** — Partial sale of AAPL that ran directly against the outcome — the stock rose ~14% after he sold, so the direction was poorly timed rather than informed.
 
 ## Summary
 

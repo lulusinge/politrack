@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 1.0
 alpha_remaining_score: 2.0
 legislative_score: 0.0
-interest_score: 8.0
+interest_score: 3.0
 generated_at: '2026-07-17T11:58:23+00:00'
 ---
 
 # John Boozman: purchase IGV ($1,001 - $15,000)
 
-**Interest score: 8/100** — Buy of a broad software ETF—directionally fine given the tech rally, but no evidence of a targeted thesis.
+**Interest score: 3/100** — Buy of a broad software ETF—directionally fine given the tech rally, but no evidence of a targeted thesis.
 
 ## Summary
 

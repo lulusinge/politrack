@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 2.0
 alpha_remaining_score: 3.0
 legislative_score: -2.0
-interest_score: 12.0
+interest_score: 6.0
 generated_at: '2026-07-17T09:00:40+00:00'
 ---
 
 # Thomas H Tuberville: sale LMT ($15,001 - $50,000)
 
-**Interest score: 12/100** — Sale of Lockheed runs mildly counter to the durable defense-budget tailwind, but it is part of an across-the-board basket liquidation rather than a directional call.
+**Interest score: 6/100** — Sale of Lockheed runs mildly counter to the durable defense-budget tailwind, but it is part of an across-the-board basket liquidation rather than a directional call.
 
 ## Summary
 

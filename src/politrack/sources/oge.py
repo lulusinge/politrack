@@ -18,8 +18,6 @@ from .base import SourceUnavailable
 
 name = "oge"
 
-INDEX_URL = "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Filings+by+Date?OpenView"
-
 ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
 CELL_RE = re.compile(r"<td[^>]*>(.*?)</td>", re.S)
 HREF_RE = re.compile(r"""href=['"](https?://extapps2\.oge\.gov/201/Presiden\.nsf/[^'"]*?/([0-9A-F]{32})/\$FILE/[^'"]+)['"]""")
@@ -46,7 +44,7 @@ def _person(last_first: str) -> str:
 def poll() -> list[FilingRef]:
     try:
         with _client() as client:
-            resp = client.get(INDEX_URL)
+            resp = client.get(config.OGE_INDEX_URL)
             resp.raise_for_status()
             page = resp.text
     except httpx.HTTPError as e:

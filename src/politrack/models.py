@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import Literal
 
 from pydantic import BaseModel, Field
@@ -102,8 +103,6 @@ def amount_midpoint(amount_range: str | None) -> float | None:
     if normalized in AMOUNT_RANGE_MIDPOINTS:
         return float(AMOUNT_RANGE_MIDPOINTS[normalized])
     # Fallback: parse any dollar figures present and average them
-    import re
-
     figures = [float(x.replace(",", "")) for x in re.findall(r"\$?([\d,]+\d)", normalized)]
     if not figures:
         return None

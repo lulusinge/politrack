@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 1.0
 alpha_remaining_score: 1.0
 legislative_score: 0.0
-interest_score: 6.0
+interest_score: 2.0
 generated_at: '2026-07-17T11:53:29+00:00'
 ---
 
 # Thomas H Tuberville: sale AWK ($15,001 - $50,000)
 
-**Interest score: 6/100** — Sale, but the stock rose ~9.7% afterward — the direction was wrong, indicating no informational edge and consistent with a mechanical rebalance rather than a bearish thesis.
+**Interest score: 2/100** — Sale, but the stock rose ~9.7% afterward — the direction was wrong, indicating no informational edge and consistent with a mechanical rebalance rather than a bearish thesis.
 
 ## Summary
 

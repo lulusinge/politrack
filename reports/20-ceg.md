@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 3.0
 alpha_remaining_score: 4.0
 legislative_score: 2.0
-interest_score: 14.0
+interest_score: 8.0
 generated_at: '2026-07-17T12:00:32+00:00'
 ---
 
 # John Boozman: purchase CEG ($1,001 - $15,000)
 
-**Interest score: 14/100** — Buy of Constellation Energy is loosely aligned with a pro-nuclear policy tailwind, but the trade is too small and generic to read as a conviction bet.
+**Interest score: 8/100** — Buy of Constellation Energy is loosely aligned with a pro-nuclear policy tailwind, but the trade is too small and generic to read as a conviction bet.
 
 ## Summary
 

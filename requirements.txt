@@ -1,5 +1,8 @@
 # Streamlit Community Cloud installs from this file (dashboard only — the
 # watcher installs the full package from pyproject.toml in GitHub Actions).
-streamlit>=1.40
+# Exact-pinned: dashboard/app.py injects CSS against Streamlit-internal
+# data-testid selectors validated on this version — re-verify styling on upgrade.
+streamlit==1.59.2
 pandas>=2.0
 python-frontmatter>=1.1
+python-dotenv>=1.0

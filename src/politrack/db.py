@@ -80,19 +80,9 @@ CREATE TABLE IF NOT EXISTS runs (
   errors TEXT
 );
 
-CREATE TABLE IF NOT EXISTS subscribers (
-  id INTEGER PRIMARY KEY,
-  email TEXT NOT NULL UNIQUE,
-  threshold REAL NOT NULL DEFAULT 70,
-  created_at TEXT
-);
-
 CREATE TABLE IF NOT EXISTS notifications (
-  id INTEGER PRIMARY KEY,
-  trade_id INTEGER NOT NULL REFERENCES trades(id),
-  email TEXT NOT NULL,
-  sent_at TEXT,
-  UNIQUE (trade_id, email)
+  trade_id INTEGER PRIMARY KEY REFERENCES trades(id),
+  sent_at TEXT
 );
 
 CREATE INDEX IF NOT EXISTS idx_trades_status ON trades(status);
@@ -112,7 +102,17 @@ def connect(db_path: Path | None = None) -> sqlite3.Connection:
     return conn
 
 
+SCHEMA_VERSION = 1
+
+
 def init_db(conn: sqlite3.Connection) -> None:
+    if conn.execute("PRAGMA user_version").fetchone()[0] < SCHEMA_VERSION:
+        # v1: pre-Buttondown notify tables go away. subscribers held plaintext
+        # emails; notifications was keyed per recipient. Dropping notifications
+        # loses only sent-dedup state (one possible duplicate digest).
+        conn.execute("DROP TABLE IF EXISTS subscribers")
+        conn.execute("DROP TABLE IF EXISTS notifications")
+        conn.execute(f"PRAGMA user_version = {SCHEMA_VERSION}")
     conn.executescript(SCHEMA)
     conn.commit()
 

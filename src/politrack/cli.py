@@ -29,6 +29,7 @@ def cycle(
     loop: bool = typer.Option(False, help="Dev mode: repeat every 30 minutes."),
 ) -> None:
     """Run one watcher cycle: poll -> extract -> analyze -> report."""
+    config.require("ANTHROPIC_API_KEY", "TAVILY_API_KEY")
     while True:
         stats = pipeline.run_cycle(
             sources=list(source) if source else None,
@@ -45,6 +46,7 @@ def cycle(
 @app.command()
 def analyze(trade_id: int = typer.Option(..., "--trade-id")) -> None:
     """Analyze a single trade by id (testing helper)."""
+    config.require("ANTHROPIC_API_KEY", "TAVILY_API_KEY")
     conn = db.connect()
     trade = conn.execute("SELECT * FROM trades WHERE id = ?", (trade_id,)).fetchone()
     if trade is None:
@@ -59,6 +61,7 @@ def analyze(trade_id: int = typer.Option(..., "--trade-id")) -> None:
 @app.command()
 def backfill(count: int = typer.Option(100, help="Target number of analyzed trades.")) -> None:
     """Promote recent backlog filings and analyze up to COUNT trades (launch content)."""
+    config.require("ANTHROPIC_API_KEY", "TAVILY_API_KEY")
     stats = pipeline.run_backfill(count)
     typer.echo(f"Backfill done: {stats}")
 

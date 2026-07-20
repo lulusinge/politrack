@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-import json
-from datetime import date, datetime
+from datetime import date
 
 import httpx
 from anthropic import beta_tool
@@ -277,7 +276,7 @@ def record_analysis(
         insider_edge_score: 0-10. Likelihood the person had an informational advantage (committee overlap with the company's sector, timing vs non-public events, lobbying ties, track record).
         alpha_remaining_score: 0-10. How much of the edge is NOT yet priced in (10 = the thesis has not moved the price yet; 0 = fully priced in since the trade).
         legislative_score: -10 to +10. Net legislative/regulatory effect on the POSITION taken (positive = pending/likely legislation supports the trade direction).
-        interest_score: 0-100 composite. How interesting this trade is for a retail investor to act on today. Weigh edge, remaining alpha, legislation, trade size, and direction alignment.
+        interest_score: 0-100 composite. How ACTIONABLE this trade is for a retail investor TODAY. Actionability dominates: if the thesis is already played out, the position is closed, or the move is fully priced in (low alpha_remaining_score), the score MUST be low regardless of how suspicious or newsworthy the conduct was. A juicy but fully-realized trade caps around 40; scores above 70 are reserved for setups where committee positioning, legislation, and remaining alpha all point to a move a member of the public could still participate in. Conduct/compliance findings belong in the summary and thesis, not in this score.
         direction_alignment: One sentence: does the trade direction match the thesis (e.g. "Buy aligned with expected defense-budget tailwind").
         summary: 2-3 sentence verdict shown in the dashboard feed.
         thesis_markdown: The full thesis in Markdown: what was traded, who traded it and their positioning, timing and price action, legislative angle, what is/isn't priced in, and why it is or isn't interesting. Use ## subheadings.

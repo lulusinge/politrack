@@ -2,6 +2,8 @@
 name = "politrack"
 version = "0.1.0"
 description = "Dashboard surfacing interesting stocks from US politician trading disclosures"
+readme = "README.md"
+license = {file = "LICENSE"}
 requires-python = ">=3.11"
 dependencies = [
     "anthropic>=0.116.0",

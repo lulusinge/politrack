@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 1.0
 alpha_remaining_score: 1.0
 legislative_score: 0.0
-interest_score: 4.0
+interest_score: 1.0
 generated_at: '2026-07-17T11:59:13+00:00'
 ---
 
 # John Boozman: partial_sale IEF ($1,001 - $15,000)
 
-**Interest score: 4/100** — Partial sale of a Treasury bond ETF is a mild bet against long-duration bonds (i.e., rising yields), but the position size and instrument make any directional thesis negligible.
+**Interest score: 1/100** — Partial sale of a Treasury bond ETF is a mild bet against long-duration bonds (i.e., rising yields), but the position size and instrument make any directional thesis negligible.
 
 ## Summary
 

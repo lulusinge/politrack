@@ -135,7 +135,7 @@ def analyze_trade_row(conn: sqlite3.Connection, trade: sqlite3.Row) -> bool:
             config.ANALYSIS_MODEL,
             tokens_in,
             tokens_out,
-        db.now_iso(),
+            db.now_iso(),
         ),
     )
     conn.execute(
@@ -219,7 +219,7 @@ def run_cycle(
                 errors.append(f"analyze trade {trade['id']}: {e}")
                 traceback.print_exc()
 
-    # 4. Notify subscribers about newly analyzed hot trades
+    # 4. Broadcast a digest of newly analyzed hot trades
     try:
         notify.notify_hot_trades(conn)
     except Exception as e:

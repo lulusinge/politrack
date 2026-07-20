@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 2.0
 alpha_remaining_score: 2.0
 legislative_score: 0.0
-interest_score: 7.0
+interest_score: 3.0
 generated_at: '2026-07-17T12:00:04+00:00'
 ---
 
 # John Boozman: sale ATO ($1,001 - $15,000)
 
-**Interest score: 7/100** — Sale of a regulated gas utility, but the stock rose after the sale, so the trade direction ran against the price and shows no informational edge.
+**Interest score: 3/100** — Sale of a regulated gas utility, but the stock rose after the sale, so the trade direction ran against the price and shows no informational edge.
 
 ## Summary
 

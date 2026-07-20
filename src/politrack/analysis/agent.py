@@ -41,12 +41,15 @@ news search to judge whether whatever the person might have known has already \
 moved the price, or whether the thesis still has room to play out.
 
 Then call record_analysis EXACTLY ONCE with your scores and thesis. Scoring \
-discipline: most trades are routine - reserve interest_score above 70 for \
-genuinely suspicious or actionable setups (clear committee overlap + fresh \
-catalyst + not yet priced in). A small index-fund purchase by a backbencher \
-scores near 0. Be concrete in the thesis: name the committees, bills, dates, \
-and price moves you found. If evidence is thin, say so and score low rather \
-than inventing a story.
+discipline: interest_score measures ACTIONABILITY for a retail investor today, \
+not newsworthiness. Most trades are routine and score near 0. Reserve scores \
+above 70 for setups the public can still act on: committee positioning plus a \
+live catalyst plus meaningful alpha remaining. If the move already happened, \
+the position is closed, or the edge is fully priced in, score low (a scandalous \
+but played-out trade caps around 40) and put the conduct story in the thesis - \
+the dashboard surfaces hot trades as trade ideas, not as headlines. Be concrete: \
+name the committees, bills, dates, and price moves you found. If evidence is \
+thin, say so and score low rather than inventing a story.
 
 Be efficient: you have a budget of roughly a dozen tool calls. Do not repeat \
 searches that returned nothing."""

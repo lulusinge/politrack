@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 2.0
 alpha_remaining_score: 2.0
 legislative_score: 0.0
-interest_score: 7.0
+interest_score: 3.0
 generated_at: '2026-07-17T12:01:48+00:00'
 ---
 
 # Thomas H Tuberville: sale TSCO ($1,001 - $15,000)
 
-**Interest score: 7/100** — Sale with no discernible thesis; TSCO tracked SPY, so the direction reflects portfolio rebalancing rather than a bearish informed view.
+**Interest score: 3/100** — Sale with no discernible thesis; TSCO tracked SPY, so the direction reflects portfolio rebalancing rather than a bearish informed view.
 
 ## Summary
 

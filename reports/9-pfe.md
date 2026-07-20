@@ -13,13 +13,13 @@ investable: true
 insider_edge_score: 2.0
 alpha_remaining_score: 3.0
 legislative_score: 0.0
-interest_score: 7.0
+interest_score: 3.0
 generated_at: '2026-07-17T11:55:43+00:00'
 ---
 
 # Thomas H Tuberville: sale PFE ($15,001 - $50,000)
 
-**Interest score: 7/100** — Sale of PFE with no identifiable thesis; stock drifted down slightly (-1.9% vs SPY +1.8%), so the "sell" was directionally neutral-to-mildly-correct but not informative.
+**Interest score: 3/100** — Sale of PFE with no identifiable thesis; stock drifted down slightly (-1.9% vs SPY +1.8%), so the "sell" was directionally neutral-to-mildly-correct but not informative.
 
 ## Summary
 
