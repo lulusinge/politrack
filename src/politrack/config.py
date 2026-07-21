@@ -35,7 +35,9 @@ BMC_SLUG = os.getenv("BMC_SLUG", "")
 
 # Models
 ANALYSIS_MODEL = "claude-opus-4-8"
-EXTRACTION_MODEL = "claude-opus-4-8"
+# Extraction is bounded structured parsing — Sonnet handles it at ~60% lower
+# cost than Opus; analysis stays on Opus (the reports are the product).
+EXTRACTION_MODEL = "claude-sonnet-5"
 
 # Analysis guardrails (no daily cap by design; these bound a single runaway trade)
 MAX_AGENT_ITERATIONS = 15
