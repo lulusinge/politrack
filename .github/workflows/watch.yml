@@ -2,7 +2,9 @@ name: watch
 
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    # Hourly during US business hours, Mon-Fri only. GitHub cron is UTC and
+    # DST-blind: 13-22 UTC = 9am-6pm ET in summer, 8am-5pm ET in winter.
+    - cron: "0 13-22 * * 1-5"
   workflow_dispatch:
     inputs:
       backfill_count:
