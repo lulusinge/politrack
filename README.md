@@ -11,7 +11,7 @@ Government Act disclosures.
 ## How it works
 
 ```
-every 30 min (GitHub Actions)
+hourly, US business hours (GitHub Actions)
   poll House Clerk index ─┐
   poll Senate eFD ────────┼─> new filings -> Claude extracts trades from the PDFs/HTML
   poll OGE 278-T index ───┘        │
@@ -61,7 +61,8 @@ pytest                           # offline parser tests
 1. **Push to GitHub** (public repo recommended — unlimited Actions minutes).
 2. **Secrets**: repo → Settings → Secrets and variables → Actions → add
    `ANTHROPIC_API_KEY` and `TAVILY_API_KEY`.
-3. The `watch` workflow runs every 30 minutes and commits results. Trigger it
+3. The `watch` workflow runs hourly during US business hours (13–22 UTC,
+   Mon–Fri) and commits results. Trigger it
    manually via the Actions tab (`workflow_dispatch`); pass `backfill_count` to
    run a backfill in the cloud. **Tip:** run the initial
    `politrack backfill --count 100` locally instead — 100 Opus analyses take

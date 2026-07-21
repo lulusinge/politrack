@@ -350,7 +350,7 @@ st.write("")
 
 df = load_feed()
 if df.empty:
-    st.info("No analyzed trades yet — new disclosures are checked every 30 minutes. Check back soon.")
+    st.info("No analyzed trades yet — new disclosures are checked hourly on US business days. Check back soon.")
     st.stop()
 
 # ---------------------------------------------------------------- sidebar
@@ -416,7 +416,7 @@ with tab_hot:
                 f"Nothing actionable above {HOT_THRESHOLD} right now — scores "
                 "measure whether you can still act on a trade, and most disclosed "
                 "moves are routine or already played out. New disclosures are "
-                "checked every 30 minutes."
+                "checked hourly on US business days."
             )
         preview = view.head(3)  # already interest_score DESC from the query
         if not preview.empty:
